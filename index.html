@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es-419">
+
+<head>
+    <title>SIGILO</title>
+
+    <script type="text/javascript">
+        function cambiarUbicacion(identificador) {
+            window.location.hash = identificador;
+            return false;
+        }
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="js/popup.js"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="img/Icono.png">
+
+</head>
+
+<body>
+    <header id="inicio">
+        <div class="logo">
+            <a href="#inicio"><img src="/img/Icono Barra.png" alt="Logo Sigilo"></a>
+        </div>
+        <nav>
+            <a href="#historia" onclick="cambiarUbicacion('historia')">SOBRE NOSOTROS</a>
+            <a href="#productosh" onclick="cambiarUbicacion('productosh')">PRODUCTOS</a>
+            <a href="#verdeh" onclick="cambiarUbicacion('verdeh')">CAFÉ VERDE</a>
+            <a href="#contactoh" onclick="cambiarUbicacion('contactoh')">CONTÁCTANOS</a>
+            <a href="carrito.html" target="_blank"><img src="/img/Carrito.png" alt="Carrito de Compras"></img></a>
+        </nav>
+    </header>
+    <div class="whatsapp">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <a href="https://api.whatsapp.com/send?phone=573204963699&text=Hola%2C%20quiero%20atenci%C3%B3n%20personalizada.%20%E2%98%95"
+            class="float" target="_blank">
+            <i class="fa fa-whatsapp my-float"></i>
+        </a>
+    </div>
+    <div class="tienda">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <a href="carrito.html" class="shop" target="_blank">
+            <i class="fa fa-shopping-cart"></i>
+        </a>
+    </div>
+    <div class="banner">
+        <img src="/img/B1 - copia.jpg" alt="">
+    </div>
+
+    <div class="historia" id="historia">
+        <h1>SOBRE NOSOTROS</h1>
+        <div class="movil">
+            Somos el reflejo de las historias y lugares detrás de cada taza de café. Iniciamos en
+            los cultivos con un constante acompañamiento a nuestros caficultores en cada uno
+            de los procesos que desarrollan, de esta forma, cuidamos cada detalle de manera
+            sigilosa, aprendiendo juntos y obteniendo el equilibrio deseado entre precio justo y
+            calidad para clientes y productores.
+        </div>
+        <div class="pc">
+            Somos el reflejo de las historias y lugares detrás de cada taza de café. Iniciamos en
+            los cultivos con un constante acompañamiento a nuestros caficultores en cada uno
+            de los procesos que desarrollan, de esta forma, cuidamos cada detalle de manera
+            sigilosa, aprendiendo juntos y obteniendo el equilibrio deseado entre precio justo y
+            calidad para clientes y productores.
+        </div>
+        <div class="slider-container">
+            <div class="slider position"></div>
+        </div>
+    </div>
+
+    <div class="productosh" id="productosh">
+        <h1>PRODUCTOS</h1>
+    </div>
+
+    <div class="productos" id="productos">
+
+        <div class="card2" id="card2">
+
+            <div class="face front" id="face-front-oncilla">
+                <img src="/img/Productos/Oncilla Logo.PNG"></img>
+            </div>
+
+            <div class="face back" id="face-back-oncilla">
+                <br>
+                <img src="/img/Productos/Oncilla.png" alt="">
+                <div class="link" id="link-oncilla">
+                    <br><br><br><br><br><br>
+                    <a href="#oncillla" onclick="mostrarPopup()">SABER MÁS</a>
+                </div>
+            </div>
+
+            <div id="miPopup" style="display: none;">
+                <h1 style="text-align: center; justify-content: center">ONCILLA</h1><br>
+                Contenido sobre oncilla<br>
+                Contenido sobre oncilla<br>
+                Contenido sobre oncilla<br><br>
+                <button onclick="cerrarPopup()" style="margin-left: 80px;">X</button>
+            </div>
+
+        </div>
+
+        <div class="card4" id="card4">
+
+            <div class="face front" id="face-front-tigrillo">
+                <img src="/img/Productos/Tigrillo Logo.PNG"></img>
+            </div>
+
+            <div class="face back" id="face-back-tigrillo">
+                <br>
+                <img src="/img/Productos/Tigrillo.png" alt="">
+                <div class="link" id="link-tigrillo">
+                    <br><br><br><br><br><br><br>
+                    <a href="#tigrillo" onclick="mostrarPopup2()">SABER MÁS</a>
+                </div>
+            </div>
+
+            <div id="miPopup2" style="display: none;">
+                <h1 style="text-align: center; justify-content: center">TIGRILLO</h1><br>
+                Contenido sobre tigrillo<br>
+                Contenido sobre tigrillo<br>
+                Contenido sobre tigrillo<br><br>
+                <button onclick="cerrarPopup2()" style="margin-left: 75px;">X</button>
+            </div>
+
+        </div>
+
+        <div class="card" id="card">
+
+            <div class="face front" id="face front">
+                <img src="/img/Productos/Ocelote Logo.PNG"></img>
+            </div>
+
+            <div class="face back" id="face-back-ocelote">
+                <br>
+                <img src="/img/Productos/Ocelote.png" alt="">
+                <div class="link" id="link-ocelote">
+                    <br><br><br><br><br><br>
+                    <a href="#ocelote" onclick="mostrarPopup3()">SABER MÁS</a>
+                </div>
+            </div>
+
+            <div id="miPopup3" style="display: none;">
+                <h1 style="text-align: center; justify-content: center">OCELOTE</h1><br>
+                Contenido sobre ocelote<br>
+                Contenido sobre ocelote<br>
+                Contenido sobre ocelote<br><br>
+                <button onclick="cerrarPopup3()" style="margin-left: 80px;">X</button>
+            </div>
+
+        </div>
+
+        <div class="card3" id="card3">
+
+            <div class="face front" id="face front">
+                <img src="/img/Productos/Jaguar Logo.PNG"></img>
+            </div>
+
+            <div class="face back" id="face-back-jaguar">
+                <br>
+                <img src="/img/Productos/Jaguar.png" alt="">
+                <div class="link" id="link-jaguar">
+                    <br><br><br><br><br><br><br>
+                    <a href="#jaguar" onclick="mostrarPopup4()">SABER MÁS</a>
+                </div>
+            </div>
+
+            <div id="miPopup4" style="display: none;">
+                <h1 style="text-align: center; justify-content: center">JAGUAR</h1><br>
+                Contenido sobre jaguar<br>
+                Contenido sobre jaguar<br>
+                Contenido sobre jaguar<br><br>
+                <button onclick="cerrarPopup4()" style="margin-left: 75px;">X</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="verdeh" id="verdeh">
+        <h1>CAFÉ VERDE</h1>
+    </div>
+    <div class="verde" id="verde">
+        <section class="contact">
+            <div class="contact__image-wrapper">
+                <img src="/img/V1.JPG" alt="" class="contact__image" style="width: 650px; height: 350px;">
+            </div>
+            <div class="contact__right-side">
+                <p>Vive momentos únicos con nuestro café verde.</p>
+            </div>
+        </section>
+        <br><br>
+        <section class="contact">
+            <div class="contact__left-side">
+                <p style="font-size: 30px;">Vive momentos únicos con nuestro café verde.</p>
+            </div>
+            <div class="contact__image-wrapper">
+                <img src=" /img/V2.JPG" alt="" class="contact__image" style="width: 650px; height: 350px;">
+            </div>
+        </section>
+
+    </div>
+
+    <div class="contactoh" id="contactoh">
+        <h1>CONTÁCTANOS</h1>
+    </div>
+    <div class="contacto" id="contacto">
+        Si tienes alguna duda o inquietud, no dudes en comunicarte con nosotros. Somos SIGILO, somos familia.
+        <br><br>
+        <section class="contact">
+            <div class="contact__image-wrapper">
+                <img src="/img/Contacto.jpg" alt="" class="contact__image">
+            </div>
+            <div class="contact__right-side">
+                <form action="enviar.php" method="post" class="contact__form-wrapper">
+                    <div class="contact__input-line">
+                        <label for="name" class="contact__label">Nombre</label>
+                        <input type="text" name="name" id="name" class="contact__input" required>
+                    </div>
+                    <div class="contact__input-line">
+                        <label for="email" class="contact__label">Correo</label>
+                        <input type="email" name="email" id="email" class="contact__input" required>
+                    </div>
+                    <div class="contact__input-line">
+                        <label for="subject" class="contact__label">Asunto</label>
+                        <input type="text" name="subject" id="subject" class="contact__input" required>
+                    </div>
+                    <div class="contact__input-line">
+                        <label for="message" class="contact__label">Mensaje</label>
+                        <textarea type="text" name="message" id="message" class="contact__input--textarea"
+                            required></textarea>
+                    </div>
+                    <input type="submit" value="ENVIAR" class="contact__submit-button">
+                </form>
+            </div>
+        </section>
+    </div>
+    <footer class="pie-pagina">
+        <div class="pc-f">
+            <div class="grupo-1">
+                <div class="box">
+                    <h2>SECCIONES</h2>
+                    <a href="#historia" style="color: #0f0f0f;">Nuestra Historia</a><br><br>
+                    <a href="#productosh" style="color: #0f0f0f;">Productos</a><br><br>
+                    <a href="carrito.html" style="color: #0f0f0f;">Tienda</a><br><br>
+                    <a href="#verdeh" style="color: #0f0f0f;">Café Verde</a><br><br>
+                    <a href="#contactoh" style="color: #0f0f0f;">Contáctanos</a><br><br>
+                </div>
+                <div class="boxes">
+                    <a href="#inicio">
+                        <img src="/img/Logo.png" alt="Logo Sigilo">
+                    </a>
+                </div>
+
+                <div class="box">
+                    <h2>CONTACTO</h2>
+                    <div class="red-social">
+                        <a href="mailto:info@sigilocol.com">
+                            <p>info@sigilocol.com</p>
+                        </a>
+                        <p>+57 320 496 3699</p>
+                        <p>Armenia - Colombia</p>
+                        <a href="https://www.instagram.com/sigilo.col" class="fa fa-instagram"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="movil-f">
+            <div class="grupo-1">
+                <div class="box">
+                    <h2>SECCIONES</h2>
+                    <a href="#historia" style="color: #0f0f0f;">Nuestra Historia</a><br><br>
+                    <a href="#productosh" style="color: #0f0f0f;">Productos</a><br><br>
+                    <a href="carrito.html" style="color: #0f0f0f;">Tienda</a><br><br>
+                    <a href="#verdeh" style="color: #0f0f0f;">Café Verde</a><br><br>
+                    <a href="#contactoh" style="color: #0f0f0f;">Contáctanos</a><br><br>
+                </div>
+
+                <div class="box">
+                    <h2>CONTACTO</h2>
+                    <div class="red-social">
+                        <a href="mailto:info@sigilocol.com">
+                            <p style="font-size: 15px;">info@sigilocol.com</p>
+                        </a>
+                        <p style="white-space: nowrap; font-size: 14px;">Armenia - Colombia</p>
+                        <a href="https://www.instagram.com/sigilo.col" class="fa fa-instagram"></a>
+                        <a href="https://api.whatsapp.com/send?phone=573204963699&text=Hola%2C%20quiero%20atenci%C3%B3n%20personalizada.%20%E2%98%95"
+                            class="fa fa-whatsapp"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grupo-2">
+            <small>&copy; 2023 <b>SIGILO</b>. Todos los Derechos Reservados.</small>
+        </div>
+    </footer>
+</body>
+
+</html>

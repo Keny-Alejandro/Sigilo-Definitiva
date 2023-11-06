@@ -1,0 +1,1290 @@
+@font-face {
+
+    font-family: "Clan Medium";
+    src: url("/font/clanmedium.ttf") format('truetype');
+
+    font-family: "Clan News";
+    src: url("/font/clannews.ttf") format('truetype');
+
+}
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url("/img/Fondo.png");
+    background-size: cover;
+}
+
+a {
+    text-decoration: none;
+    color: #f6d995;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.historia {
+    padding: 20px;
+    text-align: justify;
+    align-items: center;
+    justify-content: center;
+    font-family: "Clan News";
+}
+
+.productosh {
+    padding-top: 60px;
+    padding-bottom: 10px;
+    font-family: "Clan Medium";
+    text-align: center;
+}
+
+.productos {
+    display: grid;
+    padding-right: 200px;
+    padding-top: 30px;
+    padding-left: 9px;
+    grid-template-columns: repeat(auto-fit,
+            minmax(150px,
+                1fr));
+    gap: 180px;
+    font-family: "Clan News";
+}
+
+.pc {
+    font-size: 30px;
+    text-align: justify;
+    margin-right: 750px;
+    margin-top: 30px;
+    padding-top: 10px;
+    line-height: 30px;
+}
+
+.historia h1 {
+    padding-top: 20px;
+    padding-bottom: 10px;
+    font-family: "Clan Medium";
+    text-align: center;
+}
+
+.verde {
+    padding: 20px;
+    text-align: justify;
+    align-items: center;
+    justify-content: center;
+    font-family: "Clan News";
+}
+
+.verdeh {
+    padding-top: 60px;
+    padding-bottom: 10px;
+    font-family: "Clan Medium";
+    text-align: center;
+}
+
+.contacto {
+    padding: 30px;
+    text-align: justify;
+    align-items: center;
+    justify-content: center;
+    font-family: "Clan News";
+    font-size: 25px;
+}
+
+.contactoh {
+    padding-top: 60px;
+    padding-bottom: 10px;
+    font-family: "Clan Medium";
+    text-align: center;
+}
+
+header {
+    font-family: "Clan Medium";
+    display: flex;
+    height: 100px;
+    background-color: #060606;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    font-size: 20px;
+    background-image: none;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 100px;
+    margin-left: 40px;
+}
+
+nav img {
+    height: 20px;
+}
+
+nav a {
+    padding-right: 40px;
+}
+
+.banner img {
+    width: 1349px;
+    height: 525px;
+}
+
+.position {
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+
+.slider {
+    background-image: url(/img/A1.jpg);
+    background-size: cover;
+    height: 350px;
+    width: 700px;
+    border-radius: 10px;
+    margin-left: 955px;
+    top: 920px;
+    animation: animate 15s infinite;
+    box-shadow: 0 5px 10px #000;
+}
+
+.card {
+    position: relative;
+    width: 300px;
+    height: 350px;
+    margin: 20px;
+}
+
+.card .face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: .5s;
+}
+
+.card .front {
+    transform: perspective(600px) rotateY(0deg);
+    box-shadow: 0 5px 10px #000;
+}
+
+.card .front img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card .back {
+    transform: perspective(600px) rotateY(180deg);
+    background-image: url("/img/Productos/Ocelote Marquilla.PNG");
+    background-size: cover;
+    padding: 5px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    box-shadow: 0 5px 10px #000;
+}
+
+.card .back .link {
+    height: 50px;
+    line-height: 5px;
+    text-decoration: underline;
+}
+
+.card .back .link a {
+    color: white;
+}
+
+.card .back h3 {
+    font-size: 30px;
+    margin-top: 20px;
+    letter-spacing: 2px;
+}
+
+.card .back p {
+    letter-spacing: 1px;
+}
+
+.card:hover .front {
+    transform: perspective(600px) rotateY(180deg);
+}
+
+.card:hover .back {
+    transform: perspective(600px) rotateY(360deg);
+}
+
+.card2 {
+    position: relative;
+    width: 300px;
+    height: 350px;
+    margin: 20px;
+}
+
+.card2 .face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: .5s;
+}
+
+.card2 .front {
+    transform: perspective(600px) rotateY(0deg);
+    box-shadow: 0 5px 10px #000;
+}
+
+.card2 .front img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card2 .back {
+    transform: perspective(600px) rotateY(180deg);
+    background-image: url("/img/Productos/Oncilla Marquilla.PNG");
+    background-size: cover;
+    padding: 4px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    box-shadow: 0 5px 10px #000;
+}
+
+.card2 .back .link {
+    height: 50px;
+    line-height: 5px;
+    text-decoration: underline;
+}
+
+.card2 .back .link a {
+    color: white;
+}
+
+.card2 .back h3 {
+    font-size: 30px;
+    margin-top: 20px;
+    letter-spacing: 2px;
+}
+
+.card2 .back p {
+    letter-spacing: 1px;
+}
+
+.card2:hover .front {
+    transform: perspective(600px) rotateY(180deg);
+}
+
+.card2:hover .back {
+    transform: perspective(600px) rotateY(360deg);
+}
+
+.card3 {
+    position: relative;
+    width: 300px;
+    height: 350px;
+    margin: 20px;
+}
+
+.card3 .face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: .5s;
+}
+
+.card3 .front {
+    transform: perspective(600px) rotateY(0deg);
+    box-shadow: 0 5px 10px #000;
+}
+
+.card3 .front img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card3 .back {
+    transform: perspective(600px) rotateY(180deg);
+    background-image: url("/img/Productos/Jaguar Marquilla.PNG");
+    background-size: cover;
+    padding: 8px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    box-shadow: 0 5px 10px #000;
+}
+
+.card3 .back .link {
+    height: 50px;
+    line-height: 5px;
+    text-decoration: underline;
+}
+
+.card3 .back .link a {
+    color: white;
+}
+
+.card3 .back h3 {
+    font-size: 30px;
+    margin-top: 20px;
+    letter-spacing: 2px;
+}
+
+.card3 .back p {
+    letter-spacing: 1px;
+}
+
+.card3:hover .front {
+    transform: perspective(600px) rotateY(180deg);
+}
+
+.card3:hover .back {
+    transform: perspective(600px) rotateY(360deg);
+}
+
+.card4 {
+    position: relative;
+    width: 300px;
+    height: 350px;
+    margin: 20px;
+    font-size: 15px;
+}
+
+.card4 .face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: .5s;
+}
+
+.card4 .front {
+    transform: perspective(600px) rotateY(0deg);
+    box-shadow: 0 5px 10px #000;
+}
+
+.card4 .front img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card4 .back {
+    transform: perspective(600px) rotateY(180deg);
+    background-image: url("/img/Productos/Tigrillo Marquilla.PNG");
+    background-size: cover;
+    padding: 10px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    box-shadow: 0 5px 10px #000;
+}
+
+.card4 .back .link {
+    height: 50px;
+    line-height: 5px;
+    text-decoration: underline;
+}
+
+.card4 .back .link a {
+    color: white;
+}
+
+.card4 .back h3 {
+    font-size: 30px;
+    margin-top: 20px;
+    letter-spacing: 2px;
+}
+
+.card4 .back p {
+    letter-spacing: 1px;
+}
+
+.card4:hover .front {
+    transform: perspective(600px) rotateY(180deg);
+}
+
+.card4:hover .back {
+    transform: perspective(600px) rotateY(360deg);
+}
+
+.float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    right: 1270px;
+    background-color: #25d366;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 100;
+}
+
+.float:hover {
+    text-decoration: none;
+    color: #25d366;
+    background-color: #fff;
+}
+
+.my-float {
+    margin-top: 16px;
+}
+
+.shop {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    right: 25px;
+    background-color: #FAAA2D;
+    color: #0F0F0F;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    padding-top: 12px;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 100;
+}
+
+.shop:hover {
+    text-decoration: none;
+    color: #0F0F0F;
+    background-color: #D55928;
+}
+
+.my-float-shop {
+    margin-top: 16px;
+}
+
+@keyframes animate {
+    20% {
+        background-image: url(/img/A1.jpg);
+        background-size: cover;
+    }
+
+    40% {
+        background-image: url(/img/A2.jpg);
+        background-size: cover;
+    }
+
+    60% {
+        background-image: url(/img/A3.jpg);
+        background-size: cover;
+    }
+
+    80% {
+        background-image: url(/img/A4.jpg);
+        background-size: cover;
+    }
+
+    100% {
+        background-image: url(/img/A5.jpg);
+        background-size: cover;
+    }
+}
+
+@media (max-width: 1366px) {
+    .movil {
+        display: none;
+    }
+
+    .movil-f {
+        display: none;
+    }
+
+    .verde .contact .contact__right-side {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 1024px) {
+
+    .verde .contact .contact__right-side {
+        font-size: 30px;
+    }
+
+    /* Portátil */
+    nav {
+        display: none;
+    }
+
+    .logo img {
+        margin-left: 450px;
+    }
+
+    .banner img {
+        width: 1024px;
+        height: 270px;
+    }
+
+    .slider {
+        display: flex;
+        height: 800px;
+        width: 700px;
+        margin-left: 630px;
+        margin-top: 0px;
+    }
+
+    .pc-f {
+        display: none;
+    }
+
+    .movil-f {
+        display: flex;
+        padding-left: 300px;
+    }
+
+    .productos {
+        gap: 190px;
+    }
+
+}
+
+@media (max-width: 768px) {
+
+
+    .verde .contact .contact__right-side {
+        font-size: 30px;
+    }
+
+    /* Tablet */
+    nav {
+        display: none;
+    }
+
+    .logo img {
+        margin-left: 320px;
+    }
+
+    .banner img {
+        width: 768px;
+        height: 270px;
+    }
+
+    .pc-f {
+        display: none;
+    }
+
+    .movil-f {
+        display: flex;
+        padding-left: 220px;
+    }
+
+    .pc {
+        display: none;
+    }
+
+    .movil {
+        display: flex;
+    }
+
+    .slider {
+        display: flex;
+        height: 700px;
+        width: 700px;
+        margin-left: 365px;
+    }
+
+    .productos {
+        margin-top: 10px;
+    }
+
+    .productosh {
+        margin-top: 700px;
+    }
+
+}
+
+@media (max-width: 425px) {
+
+    .verde .contact .contact__right-side {
+        font-size: 30px;
+    }
+
+    /* Móvil L */
+    nav {
+        display: none;
+    }
+
+    .logo img {
+        margin-left: 150px;
+    }
+
+    .banner img {
+        width: 425px;
+        height: 150px;
+    }
+
+    .position {
+        left: 100px;
+        top: 480px;
+    }
+
+    .slider {
+        display: flex;
+        height: 180px;
+        width: 160px;
+        margin-left: 0px;
+        margin-top: 0px;
+    }
+
+    .historia {
+        display: flex;
+    }
+
+    .movil {
+        display: flex;
+    }
+
+    .movil-f {
+        display: flex;
+        padding-left: 60px;
+    }
+
+    .historia h1 {
+        margin-bottom: 250px;
+        margin-right: 20px;
+        padding-top: 2px;
+    }
+
+    .pc {
+        display: none;
+    }
+
+    .pc-f {
+        display: none;
+    }
+
+    .productosh {
+        padding-top: 2px;
+    }
+
+    .productos {
+        padding-left: 40px;
+        gap: 10px;
+    }
+
+    .whatsapp {
+        display: none;
+    }
+
+    .pie-pagina .grupo-1 .boxes img {
+        display: none;
+    }
+
+    .pie-pagina .grupo-1 .boxes {
+        display: none;
+    }
+
+    .pie-pagina .grupo-1 .box {
+        margin-right: 1px;
+    }
+
+    .productosh {
+        margin-top: 10px;
+    }
+
+}
+
+@media (max-width: 414px) {
+
+
+    /* iPhone 6/7/8 Plus*/
+
+    .verde .contact .contact__right-side {
+        font-size: 30px;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .logo img {
+        margin-left: 135px;
+    }
+
+    .banner img {
+        width: 414px;
+        height: 150px;
+    }
+
+    .position {
+        left: 100px;
+        top: 480px;
+    }
+
+    .slider {
+        display: flex;
+        height: 180px;
+        width: 160px;
+        margin-left: 0px;
+        margin-top: 0px;
+    }
+
+    .historia {
+        display: flex;
+    }
+
+    .movil {
+        display: flex;
+    }
+
+    .movil-f {
+        display: flex;
+        padding-left: 55px;
+    }
+
+    .historia h1 {
+        margin-bottom: 250px;
+        margin-right: 20px;
+        padding-top: 2px;
+    }
+
+    .pc {
+        display: none;
+    }
+
+    .pc-f {
+        display: none;
+    }
+
+    .productosh {
+        padding-top: 2px;
+    }
+
+    .productos {
+        padding-left: 40px;
+        gap: 10px;
+    }
+
+    .pie-pagina .grupo-1 .boxes img {
+        display: none;
+    }
+
+    .pie-pagina .grupo-1 .boxes {
+        display: none;
+    }
+
+    .pie-pagina .grupo-1 .box {
+        margin-right: 1px;
+    }
+
+}
+
+@media (max-width: 390px) {
+
+    /* iPhone 12 Pro */
+    nav {
+        display: none;
+    }
+
+    .logo img {
+        margin-left: 135px;
+    }
+
+    .banner img {
+        width: 390px;
+        height: 150px;
+    }
+}
+
+@media (max-width: 375px) {
+
+    .verde .contact .contact__right-side {
+        font-size: 30px;
+    }
+
+    /* Móvil M */
+    nav {
+        display: none;
+    }
+
+    .logo img {
+        margin-left: 125px;
+    }
+
+    .banner img {
+        width: 375px;
+        height: 135px;
+    }
+
+    .position {
+        left: 100px;
+        top: 480px;
+    }
+
+    .slider {
+        display: flex;
+        height: 180px;
+        width: 160px;
+        margin-left: 0px;
+        margin-top: 70px;
+    }
+
+    .historia {
+        display: flex;
+    }
+
+    .movil {
+        display: flex;
+    }
+
+    .movil-f {
+        display: flex;
+        padding-left: 35px;
+    }
+
+    .historia h1 {
+        margin-bottom: 250px;
+        margin-right: 20px;
+        padding-top: 2px;
+    }
+
+    .pc {
+        display: none;
+    }
+
+    .pc-f {
+        display: none;
+    }
+
+    .productosh {
+        padding-top: 2px;
+    }
+
+    .productos {
+        padding-left: 22px;
+        gap: 10px;
+    }
+
+    .whatsapp {
+        display: none;
+    }
+
+    .pie-pagina .grupo-1 .boxes img {
+        display: none;
+    }
+
+    .pie-pagina .grupo-1 .boxes {
+        display: none;
+    }
+
+    .pie-pagina .grupo-1 .box {
+        margin-right: 1px;
+    }
+
+    .productosh {
+        margin-top: 10px;
+    }
+
+    .contact__submit-button {
+        width: 166px;
+        height: 50px;
+    }
+
+}
+
+@media (max-width: 320px) {
+
+    /* Móvil S */
+    nav {
+        display: none;
+    }
+
+    .logo img {
+        margin-left: 100px;
+    }
+
+    .banner img {
+        width: 320px;
+        height: 100px;
+    }
+
+    .position {
+        left: 85px;
+        top: 480px;
+    }
+
+    .slider {
+        display: flex;
+        height: 180px;
+        width: 125px;
+        margin-left: 0px;
+        margin-top: 50px;
+    }
+
+    .historia {
+        display: flex;
+    }
+
+    .movil {
+        display: flex;
+    }
+
+    .movil-f {
+        display: flex;
+        padding-left: 10px;
+    }
+
+    .historia h1 {
+        margin-bottom: 250px;
+        margin-right: 20px;
+        padding-top: 2px;
+        font-size: 25px;
+    }
+
+    .pc {
+        display: none;
+    }
+
+    .pc-f {
+        display: none;
+    }
+
+    .productosh {
+        padding-top: 2px;
+    }
+
+    .productos {
+        padding-left: 1px;
+        gap: 10px;
+    }
+
+    .whatsapp {
+        display: none;
+    }
+
+    .pie-pagina .grupo-1 .boxes img {
+        display: none;
+    }
+
+    .pie-pagina .grupo-1 .boxes {
+        display: none;
+    }
+
+    .pie-pagina .grupo-1 .box {
+        margin-right: 1px;
+    }
+
+    .productosh {
+        margin-top: 10px;
+    }
+
+    .contact__submit-button {
+        width: 140px;
+        height: 50px;
+    }
+
+    .verde .contact .contact__right-side {
+        font-size: 25px;
+    }
+
+    .card {
+        position: relative;
+        width: 280px;
+        height: 280px;
+        margin: 20px;
+    }
+
+    .card2 {
+        position: relative;
+        width: 280px;
+        height: 280px;
+        margin: 20px;
+    }
+
+    .card3 {
+        position: relative;
+        width: 280px;
+        height: 280px;
+        margin: 20px;
+    }
+
+    .card4 {
+        position: relative;
+        width: 280px;
+        height: 280px;
+        margin: 20px;
+    }
+}
+
+.contact {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact__image-wrapper {
+    height: 100%;
+    width: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact__image {
+    height: 560px;
+    width: 600px;
+    border-radius: 10px;
+}
+
+.contact__right-side {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 0 7.3% 0 4.7%;
+    width: 50%;
+}
+
+.contact__left-side {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-right: 20px;
+    width: 50%;
+}
+
+.contact__title {
+    font-size: 100px;
+    font-family: 'Bellefair', serif;
+    font-weight: 400;
+    margin-bottom: 70px;
+    text-transform: uppercase;
+}
+
+.contact__form-wrapper,
+.contact__input-line {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 100%;
+}
+
+.contact__input-line {
+    margin-bottom: 45px;
+}
+
+.contact__label {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.contact__input {
+    height: 30px;
+    outline: none;
+    padding: 5px 0;
+    border-bottom: 2px solid #121212;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    width: 100%;
+    color: #121212;
+    background-color: transparent;
+}
+
+.contact__input--textarea {
+    height: 100px;
+    outline: none;
+    padding: 5px 0;
+    border-bottom: 2px solid #121212;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    width: 100%;
+    color: #121212;
+    resize: none;
+    background-color: transparent;
+}
+
+.contact__submit-button {
+    padding: 18px 55px;
+    background-color: #121212;
+    border-radius: 50px;
+    color: #f2f2f2;
+    font-weight: 600;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.contact__submit-button:hover {
+    background-color: #2e2e2e;
+}
+
+.pie-pagina {
+    width: 100%;
+}
+
+.pie-pagina .grupo-1 {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 50px;
+    padding: 45px 0px;
+}
+
+.pie-pagina .grupo-1 .boxes {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    margin-right: 450px;
+    justify-content: center;
+    align-items: center;
+}
+
+.pie-pagina .grupo-1 .boxes img {
+    width: 300px;
+}
+
+.pie-pagina .grupo-1 .box h2 {
+    color: #0F0F0F;
+    margin-bottom: 25px;
+    font-size: 20px;
+}
+
+.pie-pagina .grupo-1 .box p {
+    color: #0F0F0F;
+    margin-bottom: 10px;
+}
+
+.pie-pagina .grupo-1 .red-social a {
+    display: inline-block;
+    text-decoration: none;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    color: #0F0F0F;
+    margin-right: 10px;
+    text-align: center;
+    transition: all 300ms ease;
+}
+
+.pie-pagina .grupo-1 .red-social a:hover {
+    color: #D55928;
+}
+
+.pie-pagina .grupo-2 {
+    padding: 15px 10px;
+    text-align: center;
+    color: #0F0F0F;
+}
+
+.pie-pagina .grupo-2 small {
+    font-size: 15px;
+}
+
+footer h2 {
+    font-family: "Clan Medium";
+}
+
+footer {
+    font-family: "Clan News";
+}
+
+.contactV {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contactV__image-wrapper {
+    height: 100%;
+    width: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 20px;
+}
+
+.contactV__right-side {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 0 7.3% 0 4.7%;
+    width: 50%;
+}
+
+#miPopup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid black;
+    z-index: 1;
+}
+
+#miPopup2 {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid black;
+    z-index: 1;
+}
+
+#miPopup3 {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid black;
+    z-index: 1;
+}
+
+#miPopup4 {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid black;
+    z-index: 1;
+}
