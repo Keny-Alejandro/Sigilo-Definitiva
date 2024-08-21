@@ -1,8 +1,5 @@
 @font-face {
 
-    font-family: "Clan Medium";
-    src: url("/font/clanmedium.ttf") format('truetype');
-
     font-family: "Clan News";
     src: url("/font/clannews.ttf") format('truetype');
 
@@ -38,7 +35,7 @@ html {
 .productosh {
     padding-top: 60px;
     padding-bottom: 10px;
-    font-family: "Clan Medium";
+    font-family: "Clan News";
     text-align: center;
 }
 
@@ -66,7 +63,7 @@ html {
 .historia h1 {
     padding-top: 20px;
     padding-bottom: 10px;
-    font-family: "Clan Medium";
+    font-family: "Clan News";
     text-align: center;
 }
 
@@ -81,7 +78,7 @@ html {
 .verdeh {
     padding-top: 60px;
     padding-bottom: 10px;
-    font-family: "Clan Medium";
+    font-family: "Clan News";
     text-align: center;
 }
 
@@ -97,12 +94,12 @@ html {
 .contactoh {
     padding-top: 60px;
     padding-bottom: 10px;
-    font-family: "Clan Medium";
+    font-family: "Clan News";
     text-align: center;
 }
 
 header {
-    font-family: "Clan Medium";
+    font-family: "Clan News";
     display: flex;
     height: 100px;
     background-color: #060606;
@@ -1211,7 +1208,7 @@ nav a {
 }
 
 footer h2 {
-    font-family: "Clan Medium";
+    font-family: "Clan News";
 }
 
 footer {
