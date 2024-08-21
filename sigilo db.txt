@@ -1,9 +1,0 @@
-PRODUCTO
-
-id
-nombre
-descripcion
-tamaño
-stock
-precio
-
