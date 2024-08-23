@@ -1,44 +1,38 @@
-// Definimos las credenciales de autenticación
+// Credenciales
 const username = 'info@sigilocol.com';
 const accessKey = 'MjJlNDMzYzQtN2QwMi00MjkyLTljYjQtOTUzY2Y1ZTEzMjg5OjRWKTM8Lk4sZUg=';
 
-// Creamos una función para obtener el token de autenticación
-async function getToken() {
-  const response = await fetch('https://api.siigo.com/auth', {
+// URL de la API de autenticación de Siigo
+const apiUrl = 'https://api.siigo.com/auth';
+
+// Elemento HTML donde se mostrará el estado de la conexión
+const statusElement = document.getElementById('status');
+
+// Configuración de la solicitud POST
+const options = {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': 'Basic ' + btoa(`${username}:${accessKey}`)
     },
     body: JSON.stringify({
-      username,
-      access_key: accessKey
+        // Si se requiere algún cuerpo adicional en la solicitud, puedes agregarlo aquí
     })
-  });
-  
-  const data = await response.json();
-  return data.access_token;
-}
+};
 
-// Creamos una función para obtener los productos de Siigo
-async function getProductosSiigo() {
-  // Obtenemos el token de autenticación
-  const token = await getToken();
-
-  // Realizamos la solicitud GET a la URL de productos de Siigo
-  const response = await fetch('https://api.siigo.com/v1/products', {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': token
-    }
-  });
-
-  // Obtenemos la respuesta y la convertimos a formato JSON
-  const data = await response.json();
-
-  // Mostramos los productos en la consola
-  console.log(data);
-}
-
-// Llamamos a la función para obtener los productos de Siigo
-getProductosSiigo();
+// Realizar la solicitud POST
+fetch(apiUrl, options)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error en la solicitud: ' + response.status);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Respuesta de la API:', data);
+        statusElement.textContent = 'CONEXIÓN';  // Mostrar "CONEXIÓN" si todo está bien
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        statusElement.textContent = 'ERROR';  // Mostrar "ERROR" si algo falla
+    });
