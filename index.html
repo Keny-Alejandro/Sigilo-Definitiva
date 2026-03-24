@@ -51,6 +51,7 @@
       .lang-btn {
         background: none;
         border: none;
+        color: #fff;
         cursor: pointer;
         font-size: 20px;
         line-height: 1;
@@ -1317,6 +1318,26 @@
         .nav-links {
           display: none;
         }
+        .lang-switcher-mobile {
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          display: flex;
+          gap: 8px;
+          z-index: 200;
+          background: rgba(15, 15, 15, 0.9);
+          backdrop-filter: blur(10px);
+          padding: 8px 12px;
+          border-radius: 30px;
+          border: 1px solid rgba(250, 170, 45, 0.2);
+        }
+        .lang-switcher-mobile .lang-btn {
+          font-size: 24px;
+          opacity: 0.6;
+        }
+        .lang-switcher-mobile .lang-btn.active {
+          opacity: 1;
+        }
         .hero-content {
           padding: 0 6vw;
         }
@@ -1399,16 +1420,14 @@
         <li>
           <div class="lang-switcher">
             <button
-              class="lang-btn active"
-              id="btn-es"
+              class="lang-btn lang-btn-es active"
               onclick="setLang('es')"
               title="Español"
             >
               🇨🇴
             </button>
             <button
-              class="lang-btn"
-              id="btn-en"
+              class="lang-btn lang-btn-en"
               onclick="setLang('en')"
               title="English"
             >
@@ -1418,6 +1437,24 @@
         </li>
       </ul>
     </nav>
+
+    <!-- LANG SWITCHER MOBILE -->
+    <div class="lang-switcher-mobile" id="mobileLang">
+      <button
+        class="lang-btn lang-btn-es active"
+        onclick="setLang('es')"
+        title="Español"
+      >
+        🇨🇴
+      </button>
+      <button
+        class="lang-btn lang-btn-en"
+        onclick="setLang('en')"
+        title="English"
+      >
+        🇺🇸
+      </button>
+    </div>
 
     <!-- HERO -->
     <section class="hero">
@@ -1473,19 +1510,19 @@
         <div class="concepto-stats">
           <div class="stat reveal reveal-delay-1">
             <div class="stat-num">4</div>
-            <div class="stat-label">Líneas de producto</div>
+            <div class="stat-label" data-key="stat1">Líneas de producto</div>
           </div>
           <div class="stat reveal reveal-delay-2">
             <div class="stat-num">100%</div>
-            <div class="stat-label">Origen colombiano</div>
+            <div class="stat-label" data-key="stat2">Origen colombiano</div>
           </div>
           <div class="stat reveal reveal-delay-3">
             <div class="stat-num">farm</div>
-            <div class="stat-label">to cup directo</div>
+            <div class="stat-label" data-key="stat3">to cup directo</div>
           </div>
           <div class="stat reveal reveal-delay-4">
             <div class="stat-num">∞</div>
-            <div class="stat-label">Perfiles de sabor</div>
+            <div class="stat-label" data-key="stat4">Perfiles de sabor</div>
           </div>
         </div>
       </div>
@@ -1723,37 +1760,37 @@
           <div class="linea-pattern"></div>
           <div class="linea-num">01</div>
           <div class="linea-name">JAGUAR</div>
-          <div class="linea-desc">
+          <div class="linea-desc" data-key="jag-desc">
             El más poderoso. Perfiles intensos y complejos, cuerpo robusto.
           </div>
-          <div class="linea-tag">Intensidad máxima</div>
+          <div class="linea-tag" data-key="jag-tag">Intensidad máxima</div>
         </div>
         <div class="linea-card ocelote reveal reveal-delay-1">
           <div class="linea-pattern"></div>
           <div class="linea-num">02</div>
           <div class="linea-name">OCELOTE</div>
-          <div class="linea-desc">
+          <div class="linea-desc" data-key="oce-desc">
             Elegante y versátil. Notas frutales y acidez brillante.
           </div>
-          <div class="linea-tag">Dulce & frutal</div>
+          <div class="linea-tag" data-key="oce-tag">Dulce & frutal</div>
         </div>
         <div class="linea-card tigrillo reveal reveal-delay-2">
           <div class="linea-pattern"></div>
           <div class="linea-num">03</div>
           <div class="linea-name">TIGRILLO</div>
-          <div class="linea-desc">
+          <div class="linea-desc" data-key="tig-desc">
             Misterioso y profundo. Notas oscuras con un final sorprendente.
           </div>
-          <div class="linea-tag">Dark & misterioso</div>
+          <div class="linea-tag" data-key="tig-tag">Dark & misterioso</div>
         </div>
         <div class="linea-card oncilla reveal reveal-delay-3">
           <div class="linea-pattern"></div>
           <div class="linea-num">04</div>
           <div class="linea-name">ONCILLA</div>
-          <div class="linea-desc">
+          <div class="linea-desc" data-key="onc-desc">
             El más delicado. Suave, dulce y de fácil acceso para todos.
           </div>
-          <div class="linea-tag">Suave & accesible</div>
+          <div class="linea-tag" data-key="onc-tag">Suave & accesible</div>
         </div>
       </div>
     </section>
@@ -1773,10 +1810,12 @@
         <!-- Especial -->
         <div class="producto-card reveal">
           <div class="producto-bg-num">01</div>
-          <div class="producto-badge">Más popular</div>
+          <div class="producto-badge" data-key="p1-badge">Más popular</div>
           <div class="producto-name">ESPECIAL</div>
-          <div class="producto-sub">Línea Especial · 340gr</div>
-          <div class="producto-desc">
+          <div class="producto-sub" data-key="p1-sub">
+            Línea Especial · 340gr
+          </div>
+          <div class="producto-desc" data-key="p1-desc">
             La esencia del café 100% colombiano. Un lavado tradicional perfecto
             para el hogar o trabajo. Con sentido patrio.
           </div>
@@ -1796,10 +1835,12 @@
         <!-- Diferenciado -->
         <div class="producto-card reveal reveal-delay-1">
           <div class="producto-bg-num">02</div>
-          <div class="producto-badge">Specialty</div>
+          <div class="producto-badge" data-key="p2-badge">Specialty</div>
           <div class="producto-name">DIFEREN-<br />CIADO</div>
-          <div class="producto-sub">Línea Diferenciado · 340gr</div>
-          <div class="producto-desc">
+          <div class="producto-sub" data-key="p2-sub">
+            Línea Diferenciado · 340gr
+          </div>
+          <div class="producto-desc" data-key="p2-desc">
             Para momentos especiales. Disponible en Honey Rojo, Natural y Suave
             Lavado. Una experiencia sensorial única.
           </div>
@@ -1818,10 +1859,12 @@
         <!-- Drip -->
         <div class="producto-card reveal reveal-delay-2">
           <div class="producto-bg-num">03</div>
-          <div class="producto-badge">Nuevo</div>
+          <div class="producto-badge" data-key="p3-badge">Nuevo</div>
           <div class="producto-name">DRIP<br />BAGS</div>
-          <div class="producto-sub">Portable · Listo en 90 seg</div>
-          <div class="producto-desc">
+          <div class="producto-sub" data-key="p3-sub">
+            Portable · Listo en 90 seg
+          </div>
+          <div class="producto-desc" data-key="p3-desc">
             ¿Sin tiempo para un café? Nuestros drips tienen la medida exacta de
             un pocillo. Solo agua caliente y listo en 1min 30seg.
           </div>
@@ -1840,10 +1883,12 @@
         <!-- Cáscara -->
         <div class="producto-card reveal">
           <div class="producto-bg-num">04</div>
-          <div class="producto-badge">Innovación</div>
+          <div class="producto-badge" data-key="p4-badge">Innovación</div>
           <div class="producto-name">INFUSIÓN<br />CÁSCARA</div>
-          <div class="producto-sub">Cascara de café · 125gr</div>
-          <div class="producto-desc">
+          <div class="producto-sub" data-key="p4-sub">
+            Cascara de café · 125gr
+          </div>
+          <div class="producto-desc" data-key="p4-desc">
             Una propuesta innovadora. Usando la cereza del café desarrollamos
             una mezcla ácida, frutal, dulce y aromática. Siempre es buen
             momento.
@@ -1863,10 +1908,12 @@
         <!-- Institucional -->
         <div class="producto-card reveal reveal-delay-1">
           <div class="producto-bg-num">05</div>
-          <div class="producto-badge">Empresas</div>
+          <div class="producto-badge" data-key="p5-badge">Empresas</div>
           <div class="producto-name">INSTITU-<br />CIONAL</div>
-          <div class="producto-sub">Para empresas · 2.5kg</div>
-          <div class="producto-desc">
+          <div class="producto-sub" data-key="p5-sub">
+            Para empresas · 2.5kg
+          </div>
+          <div class="producto-desc" data-key="p5-desc">
             Desarrollamos el perfil ideal para tu empresa. Ya molido y listo
             para greca, cafetera o tradicional. Incluye receta. Ofrecemos
             cafeteras de goteo.
@@ -1886,10 +1933,10 @@
         <!-- Honey -->
         <div class="producto-card reveal reveal-delay-2">
           <div class="producto-bg-num">06</div>
-          <div class="producto-badge">Proceso especial</div>
+          <div class="producto-badge" data-key="p6-badge">Proceso especial</div>
           <div class="producto-name">HONEY<br />PROCESS</div>
-          <div class="producto-sub">Post-cosecha · 340gr</div>
-          <div class="producto-desc">
+          <div class="producto-sub" data-key="p6-sub">Post-cosecha · 340gr</div>
+          <div class="producto-desc" data-key="p6-desc">
             Tazas muy dulces, cuerpo cremoso como yogurt y acidez balanceada.
             Disponible en Yellow, Red y Black honey.
           </div>
@@ -1926,11 +1973,11 @@
         >
           <div class="wompi-badge reveal reveal-delay-3">
             <div class="wompi-dot"></div>
-            Wompi Pagos Seguros
+            <span data-key="wompi-badge">Wompi Pagos Seguros</span>
           </div>
           <div class="wompi-badge reveal reveal-delay-4">
             <div class="wompi-dot"></div>
-            Siigo Facturación
+            <span data-key="siigo-badge">Siigo Facturación</span>
           </div>
         </div>
       </div>
@@ -1938,24 +1985,32 @@
         <div class="tienda-item reveal">
           <div class="ti-icon j">☕</div>
           <div class="ti-info">
-            <div class="ti-name">Café Especial 340gr</div>
-            <div class="ti-desc">Lavado tradicional colombiano</div>
+            <div class="ti-name" data-key="ti1-name">Café Especial 340gr</div>
+            <div class="ti-desc" data-key="ti1-desc">
+              Lavado tradicional colombiano
+            </div>
           </div>
           <div class="ti-price">$20k</div>
         </div>
         <div class="tienda-item reveal reveal-delay-1">
           <div class="ti-icon o">🌿</div>
           <div class="ti-info">
-            <div class="ti-name">Honey + Natural 340gr</div>
-            <div class="ti-desc">Procesos diferenciados premium</div>
+            <div class="ti-name" data-key="ti2-name">Honey + Natural 340gr</div>
+            <div class="ti-desc" data-key="ti2-desc">
+              Procesos diferenciados premium
+            </div>
           </div>
           <div class="ti-price">$25k</div>
         </div>
         <div class="tienda-item reveal reveal-delay-2">
           <div class="ti-icon d">📦</div>
           <div class="ti-info">
-            <div class="ti-name">Pack Institucional 2.5kg</div>
-            <div class="ti-desc">Para tu empresa o negocio</div>
+            <div class="ti-name" data-key="ti3-name">
+              Pack Institucional 2.5kg
+            </div>
+            <div class="ti-desc" data-key="ti3-desc">
+              Para tu empresa o negocio
+            </div>
           </div>
           <div class="ti-price">$50k</div>
         </div>
@@ -1974,8 +2029,8 @@
         <div class="step reveal">
           <div class="step-num">01</div>
           <div class="step-icon">🌱</div>
-          <div class="step-title">PRODUCCIÓN</div>
-          <div class="step-desc">
+          <div class="step-title" data-key="s1-title">PRODUCCIÓN</div>
+          <div class="step-desc" data-key="s1-desc">
             Trabajamos directamente con productores, asesorando los cultivos
             desde la semilla para garantizar los mejores granos.
           </div>
@@ -1984,8 +2039,8 @@
         <div class="step reveal reveal-delay-1">
           <div class="step-num">02</div>
           <div class="step-icon">🍒</div>
-          <div class="step-title">COSECHA</div>
-          <div class="step-desc">
+          <div class="step-title" data-key="s2-title">COSECHA</div>
+          <div class="step-desc" data-key="s2-desc">
             Selección manual de cerezas en su punto exacto de madurez. Solo los
             mejores frutos pasan a la siguiente etapa.
           </div>
@@ -1994,8 +2049,8 @@
         <div class="step reveal reveal-delay-2">
           <div class="step-num">03</div>
           <div class="step-icon">🔥</div>
-          <div class="step-title">TUESTE</div>
-          <div class="step-desc">
+          <div class="step-title" data-key="s3-title">TUESTE</div>
+          <div class="step-desc" data-key="s3-desc">
             Cada lote se tuesta cuidadosamente para resaltar el perfil de sabor
             único de cada origen y proceso.
           </div>
@@ -2004,8 +2059,8 @@
         <div class="step reveal reveal-delay-3">
           <div class="step-num">04</div>
           <div class="step-icon">☕</div>
-          <div class="step-title">TU TAZA</div>
-          <div class="step-desc">
+          <div class="step-title" data-key="s4-title">TU TAZA</div>
+          <div class="step-desc" data-key="s4-desc">
             El resultado final: una taza extraordinaria que captura la esencia
             de Colombia en cada sorbo que das.
           </div>
@@ -2035,7 +2090,7 @@
         class="btn-primary reveal reveal-delay-3"
         style="display: inline-flex; text-decoration: none"
       >
-        <span>Ver Instagram →</span>
+        <span data-key="ig-btn">Ver Instagram →</span>
       </a>
     </section>
 
@@ -2051,11 +2106,14 @@
         >
           EL<br />SIGILO<br />DE LO<br />MEJOR
         </h2>
-        <div class="nosotros-highlight reveal reveal-delay-2">
+        <div
+          class="nosotros-highlight reveal reveal-delay-2"
+          data-key="nos-quote"
+        >
           "¿Qué se esconde detrás de un producto de café o chocolate? Un sabor y
           una serie de valores intangibles que buscan saltar a tu boca."
         </div>
-        <p class="nosotros-body reveal reveal-delay-3">
+        <p class="nosotros-body reveal reveal-delay-3" data-key="nos-body">
           Trabajar directamente con el productor nos da una visión clara de su
           realidad. Asesorando los cultivos y procesos, garantizamos una mejor
           calidad del producto, mejorando el precio de venta y la calidad de
@@ -2065,7 +2123,7 @@
           href="/cdn-cgi/l/email-protection#8bfdeee5ffeaf8a5f8e2ece2e7e4cbece6eae2e7a5e8e4e6"
           class="btn-primary reveal reveal-delay-4"
           style="display: inline-flex; text-decoration: none; margin-top: 8px"
-          ><span>Escríbenos</span></a
+          ><span data-key="nos-btn">Escríbenos</span></a
         >
       </div>
       <div class="nosotros-visual reveal reveal-delay-2">
@@ -2087,35 +2145,22 @@
       </p>
       <div class="contacto-items">
         <a
-          href="https://wa.me/573015109186"
+          href="https://wa.me/573204963699"
           target="_blank"
           class="contacto-item reveal"
         >
           <div class="contacto-icon">📱</div>
-          <div class="contacto-label">WhatsApp</div>
-          <div class="contacto-val">+57 301 510 9186</div>
+          <div class="contacto-label" data-key="ct1-label">WhatsApp</div>
+          <div class="contacto-val">+57 320 496 3699</div>
         </a>
-        <a
-          href="/cdn-cgi/l/email-protection#bbcdded5cfdac895c8d2dcd2d7d4fbdcd6dad2d795d8d4d6"
-          class="contacto-item reveal reveal-delay-1"
-        >
-          <div class="contacto-icon">✉️</div>
-          <div class="contacto-label">Email</div>
-          <div class="contacto-val">
-            <span
-              class="__cf_email__"
-              data-cfemail="d3a5b6bda7b2a0fda0bab4babfbc93b4beb2babffdb0bcbe"
-              >[email&#160;protected]</span
-            >
-          </div>
-        </a>
+        <a href="mailto:ventas.sigilo@gmail.com">ventas.sigilo@gmail.com</a>
         <a
           href="https://www.instagram.com/sigilo.col/"
           target="_blank"
           class="contacto-item reveal reveal-delay-2"
         >
           <div class="contacto-icon">📷</div>
-          <div class="contacto-label">Instagram</div>
+          <div class="contacto-label" data-key="ct3-label">Instagram</div>
           <div class="contacto-val">@sigilo.col</div>
         </a>
       </div>
@@ -2126,13 +2171,13 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <h3>SIGILO.CO</h3>
-          <p>
+          <p data-key="footer-desc">
             Specialty Coffee & Cacao colombiano. Trabajamos directamente con
             productores para llevar lo mejor del campo colombiano a tu taza.
           </p>
         </div>
         <div class="footer-col">
-          <h4>Productos</h4>
+          <h4 data-key="footer-prod-h">Productos</h4>
           <ul>
             <li><a href="#">Café Especial</a></li>
             <li><a href="#">Diferenciado</a></li>
@@ -2143,26 +2188,23 @@
           </ul>
         </div>
         <div class="footer-col">
-          <h4>Contacto</h4>
+          <h4 data-key="footer-cont-h">Contacto</h4>
           <ul>
             <li>
-              <a
-                href="/cdn-cgi/l/email-protection#fc8a9992889d8fd28f959b959093bc9b919d9590d29f9391"
-                ><span
-                  class="__cf_email__"
-                  data-cfemail="ea9c8f849e8b99c499838d838685aa8d878b8386c4898587"
-                  >[email&#160;protected]</span
-                ></a
+              <a href="mailto:ventas.sigilo@gmail.com"
+                >ventas.sigilo@gmail.com</a
               >
             </li>
-            <li><a href="https://wa.me/573015109186">+57 301 510 9186</a></li>
+            <li><a href="https://wa.me/573204963699">+57 320 496 3699</a></li>
             <li><a href="https://instagram.com/sigilo.col">@sigilo.col</a></li>
             <li><a href="#">Colombia</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© 2025 Sigilo.co · Specialty Coffee & Cacao Colombia</span>
+        <span data-key="footer-copy"
+          >© 2026 Sigilo.co · Specialty Coffee & Cacao Colombia</span
+        >
         <span
           >Pagos seguros con <a href="#">Wompi</a> · Facturación con
           <a href="#">Siigo</a></span
@@ -2170,9 +2212,270 @@
       </div>
     </footer>
 
-    <script
-      data-cfasync="false"
-      src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
-    ></script>
+    <script>
+      var navbar = document.getElementById("navbar");
+      window.addEventListener("scroll", function () {
+        navbar.classList.toggle("scrolled", window.scrollY > 60);
+      });
+
+      var reveals = document.querySelectorAll(".reveal");
+      var ro = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) e.target.classList.add("visible");
+          });
+        },
+        { threshold: 0.12 },
+      );
+      reveals.forEach(function (el) {
+        ro.observe(el);
+      });
+
+      var T = {
+        es: {
+          stat1: "Líneas de producto",
+          stat2: "Origen colombiano",
+          stat3: "to cup directo",
+          stat4: "Perfiles de sabor",
+          "jag-desc":
+            "El más poderoso. Perfiles intensos y complejos, cuerpo robusto.",
+          "jag-tag": "Intensidad máxima",
+          "oce-desc": "Elegante y versátil. Notas frutales y acidez brillante.",
+          "oce-tag": "Dulce & frutal",
+          "tig-desc":
+            "Misterioso y profundo. Notas oscuras con un final sorprendente.",
+          "tig-tag": "Dark & misterioso",
+          "onc-desc":
+            "El más delicado. Suave, dulce y de fácil acceso para todos.",
+          "onc-tag": "Suave & accesible",
+          "p1-badge": "Más popular",
+          "p1-sub": "Línea Especial · 340gr",
+          "p1-desc":
+            "La esencia del café 100% colombiano. Un lavado tradicional perfecto para el hogar o trabajo. Con sentido patrio.",
+          "p2-badge": "Specialty",
+          "p2-sub": "Línea Diferenciado · 340gr",
+          "p2-desc":
+            "Para momentos especiales. Disponible en Honey Rojo, Natural y Suave Lavado. Una experiencia sensorial única.",
+          "p3-badge": "Nuevo",
+          "p3-sub": "Portable · Listo en 90 seg",
+          "p3-desc":
+            "¿Sin tiempo para un café? Nuestros drips tienen la medida exacta de un pocillo. Solo agua caliente y listo en 1min 30seg.",
+          "p4-badge": "Innovación",
+          "p4-sub": "Cáscara de café · 125gr",
+          "p4-desc":
+            "Una propuesta innovadora. Usando la cereza del café desarrollamos una mezcla ácida, frutal, dulce y aromática. Siempre es buen momento.",
+          "p5-badge": "Empresas",
+          "p5-sub": "Para empresas · 2.5kg",
+          "p5-desc":
+            "Desarrollamos el perfil ideal para tu empresa. Ya molido y listo para greca, cafetera o tradicional. Incluye receta. Ofrecemos cafeteras de goteo.",
+          "p6-badge": "Proceso especial",
+          "p6-sub": "Post-cosecha · 340gr",
+          "p6-desc":
+            "Tazas muy dulces, cuerpo cremoso como yogurt y acidez balanceada. Disponible en Yellow, Red y Black honey.",
+          "ti1-name": "Café Especial 340gr",
+          "ti1-desc": "Lavado tradicional colombiano",
+          "ti2-name": "Honey + Natural 340gr",
+          "ti2-desc": "Procesos diferenciados premium",
+          "ti3-name": "Pack Institucional 2.5kg",
+          "ti3-desc": "Para tu empresa o negocio",
+          "s1-title": "PRODUCCIÓN",
+          "s1-desc":
+            "Trabajamos directamente con productores, asesorando los cultivos desde la semilla para garantizar los mejores granos.",
+          "s2-title": "COSECHA",
+          "s2-desc":
+            "Selección manual de cerezas en su punto exacto de madurez. Solo los mejores frutos pasan a la siguiente etapa.",
+          "s3-title": "TUESTE",
+          "s3-desc":
+            "Cada lote se tuesta cuidadosamente para resaltar el perfil de sabor único de cada origen y proceso.",
+          "s4-title": "TU TAZA",
+          "s4-desc":
+            "El resultado final: una taza extraordinaria que captura la esencia de Colombia en cada sorbo que das.",
+          "nos-quote":
+            '"¿Qué se esconde detrás de un producto de café o chocolate? Un sabor y una serie de valores intangibles que buscan saltar a tu boca."',
+          "nos-body":
+            "Trabajar directamente con el productor nos da una visión clara de su realidad. Asesorando los cultivos y procesos, garantizamos una mejor calidad del producto, mejorando el precio de venta y la calidad de vida del productor y su familia.",
+          "nos-btn": "Escríbenos",
+          "ct1-label": "WhatsApp",
+          "ct2-label": "Email",
+          "ct3-label": "Instagram",
+          "footer-desc":
+            "Specialty Coffee & Cacao colombiano. Trabajamos directamente con productores para llevar lo mejor del campo colombiano a tu taza.",
+          "footer-prod-h": "Productos",
+          "footer-cont-h": "Contacto",
+          "footer-copy": "© 2026 Sigilo.co · Specialty Coffee & Cacao Colombia",
+          "ig-btn": "Ver Instagram →",
+          "wompi-badge": "Wompi Pagos Seguros",
+          "siigo-badge": "Siigo Facturación",
+          "concepto-label": "La Marca",
+          "concepto-title": "EL<br>SIGILO<br>ES UN<br>ARTE",
+          "concepto-text":
+            "Un nuevo reto para los consumidores de café y cacao colombiano. Una propuesta atrevida y asertiva como un felino al cazar.",
+          "lineas-label": "Nuestras Líneas",
+          "lineas-title": "CUATRO<br>FELINOS",
+          "lineas-sub":
+            "Cuatro especies de felinos colombianos, cuatro perfiles de sabor únicos. Cada línea es una experiencia distinta.",
+          "productos-label": "Tienda Online",
+          "productos-title": "NUESTROS<br>CAFÉS",
+          "tienda-label": "Pago seguro",
+          "tienda-title": "COMPRA<br>FÁCIL<br>Y RÁPIDO",
+          "tienda-tagline":
+            "Aceptamos pagos con Wompi — la plataforma de pagos más segura de Colombia. Tarjetas, PSE, Nequi y más.",
+          "proceso-label": "De la tierra a tu taza",
+          "proceso-title": "CÓMO<br>TRABAJAMOS",
+          "ig-label": "Síguenos",
+          "ig-title": "SIGILO EN<br>INSTAGRAM",
+          "nosotros-label": "Nuestra Historia",
+          "nosotros-title": "EL<br>SIGILO<br>DE LO<br>MEJOR",
+          "contacto-title": "HABLEMOS<br>DE CAFÉ",
+          "contacto-sub": "¿Listo para descubrir el sabor que se esconde?",
+        },
+        en: {
+          stat1: "Product lines",
+          stat2: "Colombian origin",
+          stat3: "to cup direct",
+          stat4: "Flavor profiles",
+          "jag-desc":
+            "The most powerful. Intense and complex profiles, robust body.",
+          "jag-tag": "Maximum intensity",
+          "oce-desc": "Elegant and versatile. Fruity notes and bright acidity.",
+          "oce-tag": "Sweet & fruity",
+          "tig-desc":
+            "Mysterious and deep. Dark notes with a surprising finish.",
+          "tig-tag": "Dark & mysterious",
+          "onc-desc": "The most delicate. Smooth, sweet and easy for everyone.",
+          "onc-tag": "Smooth & accessible",
+          "p1-badge": "Most popular",
+          "p1-sub": "Special Line · 340gr",
+          "p1-desc":
+            "The essence of 100% Colombian coffee. A traditional washed process, perfect for home or work.",
+          "p2-badge": "Specialty",
+          "p2-sub": "Differentiated Line · 340gr",
+          "p2-desc":
+            "For special moments. Available in Honey Rojo, Natural and Soft Washed. A unique sensory experience.",
+          "p3-badge": "New",
+          "p3-sub": "Portable · Ready in 90 sec",
+          "p3-desc":
+            "No time for coffee? Our drips are the exact size of a mug. Just hot water, ready in 1min 30sec.",
+          "p4-badge": "Innovation",
+          "p4-sub": "Coffee husk · 125gr",
+          "p4-desc":
+            "An innovative proposal. Using the coffee cherry we develop a delicious blend — acidic, fruity, sweet and aromatic.",
+          "p5-badge": "Business",
+          "p5-sub": "For companies · 2.5kg",
+          "p5-desc":
+            "We develop the ideal profile for your company. Pre-ground and ready for any brewing method. We offer drip coffee makers.",
+          "p6-badge": "Special process",
+          "p6-sub": "Post-harvest · 340gr",
+          "p6-desc":
+            "Very sweet cups, creamy body like yogurt and balanced acidity. Available in Yellow, Red and Black honey.",
+          "ti1-name": "Special Coffee 340gr",
+          "ti1-desc": "Traditional Colombian washed",
+          "ti2-name": "Honey + Natural 340gr",
+          "ti2-desc": "Premium differentiated processes",
+          "ti3-name": "Institutional Pack 2.5kg",
+          "ti3-desc": "For your company or business",
+          "s1-title": "PRODUCTION",
+          "s1-desc":
+            "We work directly with producers, advising on crops from the seed to guarantee the best beans.",
+          "s2-title": "HARVEST",
+          "s2-desc":
+            "Manual selection of cherries at their exact ripeness. Only the best fruits move on to the next stage.",
+          "s3-title": "ROASTING",
+          "s3-desc":
+            "Each batch is carefully roasted to highlight the unique flavor profile of each origin and process.",
+          "s4-title": "YOUR CUP",
+          "s4-desc":
+            "The final result: an extraordinary cup that captures the essence of Colombia in every sip you take.",
+          "nos-quote":
+            '"What hides behind a coffee or chocolate product? A flavor and a set of intangible values that leap to your mouth for a unique experience."',
+          "nos-body":
+            "Working directly with producers gives us a clear vision of their reality. By advising on crops and processes, we guarantee better product quality, improving sale prices and the quality of life of the producer and their family.",
+          "nos-btn": "Contact Us",
+          "ct1-label": "WhatsApp",
+          "ct2-label": "Email",
+          "ct3-label": "Instagram",
+          "footer-desc":
+            "Colombian Specialty Coffee & Cacao. We work directly with producers to bring the best of the Colombian countryside to your cup.",
+          "footer-prod-h": "Products",
+          "footer-cont-h": "Contact",
+          "footer-copy": "© 2026 Sigilo.co · Specialty Coffee & Cacao Colombia",
+          "ig-btn": "See Instagram →",
+          "wompi-badge": "Wompi Secure Payments",
+          "siigo-badge": "Siigo Invoicing",
+          "concepto-label": "The Brand",
+          "concepto-title": "SIGILO<br>IS AN<br>ART",
+          "concepto-text":
+            "A bold new challenge for coffee and cacao lovers. A daring and assertive proposal, like a feline on the hunt.",
+          "lineas-label": "Our Lines",
+          "lineas-title": "FOUR<br>FELINES",
+          "lineas-sub":
+            "Four Colombian feline species, four unique flavor profiles. Each line is a distinct experience.",
+          "productos-label": "Online Store",
+          "productos-title": "OUR<br>COFFEES",
+          "tienda-label": "Secure payment",
+          "tienda-title": "BUY<br>EASY &<br>FAST",
+          "tienda-tagline":
+            "We accept payments with Wompi, the most secure payment platform in Colombia. Cards, PSE, Nequi and more.",
+          "proceso-label": "From the earth to your cup",
+          "proceso-title": "HOW WE<br>WORK",
+          "ig-label": "Follow us",
+          "ig-title": "SIGILO ON<br>INSTAGRAM",
+          "nosotros-label": "Our Story",
+          "nosotros-title": "THE<br>SIGILO<br>OF THE<br>BEST",
+          "contacto-title": "LET'S TALK<br>COFFEE",
+          "contacto-sub": "Ready to discover the hidden flavor?",
+        },
+      };
+
+      var heroText = {
+        es: {
+          eyebrow: "Specialty Coffee & Cacao · Colombia",
+          lines: ["EL", "SABOR", "QUE SE", "OCULTA"],
+          sub: "Café y cacao de especialidad colombiano. Trabajamos directamente con nuestros productores para llevar lo mejor del campo a tu taza.",
+          btn1: "Ver Productos",
+          btn2: "Nuestra Historia",
+        },
+        en: {
+          eyebrow: "Specialty Coffee & Cacao · Colombia",
+          lines: ["THE", "FLAVOR", "THAT", "HIDES"],
+          sub: "Colombian specialty coffee and cacao. We work directly with our producers to bring the best of the field to your cup.",
+          btn1: "See Products",
+          btn2: "Our Story",
+        },
+      };
+
+      function setLang(lang) {
+        document.documentElement.lang = lang;
+
+        document.querySelectorAll(".lang-btn-es").forEach(function (el) {
+          el.classList.toggle("active", lang === "es");
+        });
+        document.querySelectorAll(".lang-btn-en").forEach(function (el) {
+          el.classList.toggle("active", lang === "en");
+        });
+
+        document.querySelectorAll("[data-es]").forEach(function (el) {
+          el.textContent = el.getAttribute("data-" + lang);
+        });
+
+        var h = heroText[lang];
+        var ey = document.querySelector(".hero-eyebrow");
+        if (ey) ey.textContent = h.eyebrow;
+        document.querySelectorAll(".hero-title div").forEach(function (el, i) {
+          if (h.lines[i] !== undefined) el.textContent = h.lines[i];
+        });
+        var hs = document.querySelector(".hero-sub");
+        if (hs) hs.textContent = h.sub;
+        var b1 = document.querySelector(".btn-primary span");
+        if (b1) b1.textContent = h.btn1;
+        var b2 = document.querySelector(".btn-secondary");
+        if (b2) b2.textContent = h.btn2;
+
+        document.querySelectorAll("[data-key]").forEach(function (el) {
+          var k = el.getAttribute("data-key");
+          if (T[lang][k] !== undefined) el.innerHTML = T[lang][k];
+        });
+      }
+    </script>
   </body>
 </html>
