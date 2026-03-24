@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SIGILO — Specialty Coffee & Cacao · Colombia</title>
+    <link rel="icon" type="image/png" href="img/Logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -39,37 +40,35 @@
         background: var(--negro);
         color: var(--crema);
         overflow-x: hidden;
-        cursor: none;
       }
 
-      /* CURSOR */
-      .cursor {
-        width: 12px;
-        height: 12px;
-        background: var(--amarillo);
-        border-radius: 50%;
-        position: fixed;
-        pointer-events: none;
-        z-index: 9999;
-        transform: translate(-50%, -50%);
-        transition:
-          transform 0.1s ease,
-          width 0.3s,
-          height 0.3s,
-          background 0.3s;
-        mix-blend-mode: difference;
+      /* LANG SWITCHER */
+      .lang-switcher {
+        display: flex;
+        align-items: center;
+        gap: 6px;
       }
-      .cursor-ring {
-        width: 36px;
-        height: 36px;
-        border: 1px solid var(--amarillo);
-        border-radius: 50%;
-        position: fixed;
-        pointer-events: none;
-        z-index: 9998;
-        transform: translate(-50%, -50%);
-        transition: all 0.15s ease;
-        opacity: 0.6;
+      .lang-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 20px;
+        line-height: 1;
+        padding: 2px 4px;
+        border-radius: 4px;
+        opacity: 0.5;
+        transition:
+          opacity 0.2s,
+          transform 0.2s;
+      }
+      .lang-btn:hover {
+        opacity: 1;
+        transform: scale(1.15);
+      }
+      .lang-btn.active {
+        opacity: 1;
+        outline: 2px solid var(--amarillo);
+        outline-offset: 2px;
       }
 
       /* NAV */
@@ -247,7 +246,6 @@
         text-transform: uppercase;
         text-decoration: none;
         border: none;
-        cursor: none;
         transition:
           background 0.3s,
           transform 0.3s;
@@ -282,7 +280,6 @@
         text-transform: uppercase;
         text-decoration: none;
         border: 1px solid rgba(237, 224, 200, 0.3);
-        cursor: none;
         transition:
           border-color 0.3s,
           color 0.3s;
@@ -524,7 +521,6 @@
       .linea-card {
         position: relative;
         padding: 48px 32px 40px;
-        cursor: none;
         overflow: hidden;
         transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
         min-height: 440px;
@@ -648,7 +644,6 @@
         border: 1px solid var(--crema-oscuro);
         padding: 40px 32px;
         position: relative;
-        cursor: none;
         transition:
           transform 0.3s,
           box-shadow 0.3s;
@@ -743,7 +738,6 @@
         text-transform: uppercase;
         text-decoration: none;
         border: none;
-        cursor: none;
         transition: background 0.3s;
       }
       .btn-comprar:hover {
@@ -854,7 +848,6 @@
         padding: 24px;
         background: var(--crema);
         border: 1px solid var(--crema-oscuro);
-        cursor: none;
         transition: background 0.3s;
       }
       .tienda-item:hover {
@@ -1010,7 +1003,6 @@
         aspect-ratio: 1;
         background: var(--negro);
         overflow: hidden;
-        cursor: none;
         position: relative;
       }
       .ig-item::after {
@@ -1195,7 +1187,6 @@
         text-decoration: none;
         color: var(--crema);
         transition: transform 0.3s;
-        cursor: none;
       }
       .contacto-item:hover {
         transform: translateY(-4px);
@@ -1272,7 +1263,6 @@
         color: rgba(237, 224, 200, 0.45);
         text-decoration: none;
         transition: color 0.3s;
-        cursor: none;
       }
       .footer-col ul a:hover {
         color: var(--crema);
@@ -1369,76 +1359,63 @@
     </style>
   </head>
   <body>
-    <!-- CURSOR -->
-    <div class="cursor" id="cursor"></div>
-    <div class="cursor-ring" id="cursorRing"></div>
-
     <!-- NAV -->
     <nav id="navbar">
       <a href="#" class="nav-logo">
-        <svg
-          width="32"
-          height="32"
-          viewBox="0 0 100 100"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <ellipse
-            cx="50"
-            cy="25"
-            rx="28"
-            ry="20"
-            stroke="#EDE0C8"
-            stroke-width="3"
-            fill="none"
-          />
-          <ellipse
-            cx="32"
-            cy="22"
-            rx="10"
-            ry="14"
-            stroke="#EDE0C8"
-            stroke-width="2.5"
-            fill="none"
-          />
-          <ellipse
-            cx="68"
-            cy="22"
-            rx="10"
-            ry="14"
-            stroke="#EDE0C8"
-            stroke-width="2.5"
-            fill="none"
-          />
-          <ellipse cx="40" cy="44" rx="8" ry="5" fill="#EDE0C8" />
-          <ellipse cx="60" cy="44" rx="8" ry="5" fill="#EDE0C8" />
-          <path
-            d="M35 60 Q50 72 65 60"
-            stroke="#EDE0C8"
-            stroke-width="2.5"
-            fill="none"
-          />
-          <path
-            d="M25 58 Q18 65 22 72"
-            stroke="#EDE0C8"
-            stroke-width="2.5"
-            fill="none"
-          />
-          <path
-            d="M75 58 Q82 65 78 72"
-            stroke="#EDE0C8"
-            stroke-width="2.5"
-            fill="none"
-          />
-        </svg>
+        <img
+          src="img/Logo.png"
+          alt="Sigilo Logo"
+          style="
+            width: 38px;
+            height: 38px;
+            object-fit: contain;
+            filter: invert(1) sepia(0.2) brightness(1.1);
+          "
+        />
         SIGILO<span>.CO</span>
       </a>
       <ul class="nav-links">
-        <li><a href="#lineas">Líneas</a></li>
-        <li><a href="#productos">Productos</a></li>
-        <li><a href="#proceso">Proceso</a></li>
-        <li><a href="#nosotros">Nosotros</a></li>
-        <li><a href="#contacto" class="nav-cta">Comprar</a></li>
+        <li><a href="#lineas" data-es="Líneas" data-en="Lines">Líneas</a></li>
+        <li>
+          <a href="#productos" data-es="Productos" data-en="Products"
+            >Productos</a
+          >
+        </li>
+        <li>
+          <a href="#proceso" data-es="Proceso" data-en="Process">Proceso</a>
+        </li>
+        <li>
+          <a href="#nosotros" data-es="Nosotros" data-en="About">Nosotros</a>
+        </li>
+        <li>
+          <a
+            href="#contacto"
+            class="nav-cta"
+            data-es="Comprar"
+            data-en="Buy Now"
+            >Comprar</a
+          >
+        </li>
+        <li>
+          <div class="lang-switcher">
+            <button
+              class="lang-btn active"
+              id="btn-es"
+              onclick="setLang('es')"
+              title="Español"
+            >
+              🇨🇴
+            </button>
+            <button
+              class="lang-btn"
+              id="btn-en"
+              onclick="setLang('en')"
+              title="English"
+            >
+              🇺🇸
+            </button>
+          </div>
+        </li>
       </ul>
     </nav>
 
@@ -1476,14 +1453,20 @@
           "
         />
       </div>
+      <div class="hero-scroll">
+        <div class="scroll-line"></div>
+        Scroll
+      </div>
     </section>
 
     <!-- CONCEPTO -->
     <section class="concepto" id="nosotros-preview">
       <div class="reveal">
-        <div class="section-label">La Marca</div>
-        <h2 class="section-title">EL<br />SIGILO<br />ES UN<br />ARTE</h2>
-        <p class="concepto-text">
+        <div class="section-label" data-key="concepto-label">La Marca</div>
+        <h2 class="section-title" data-key="concepto-title">
+          EL<br />SIGILO<br />ES UN<br />ARTE
+        </h2>
+        <p class="concepto-text" data-key="concepto-text">
           Un nuevo reto para los consumidores de café y cacao colombiano. Una
           propuesta atrevida y asertiva como un felino al cazar.
         </p>
@@ -1711,13 +1694,19 @@
     <section class="lineas" id="lineas">
       <div class="lineas-header">
         <div>
-          <div class="section-label reveal">Nuestras Líneas</div>
-          <h2 class="section-title reveal reveal-delay-1">
+          <div class="section-label reveal" data-key="lineas-label">
+            Nuestras Líneas
+          </div>
+          <h2
+            class="section-title reveal reveal-delay-1"
+            data-key="lineas-title"
+          >
             CUATRO<br />FELINOS
           </h2>
         </div>
         <p
           class="reveal reveal-delay-2"
+          data-key="lineas-sub"
           style="
             max-width: 360px;
             font-size: 14px;
@@ -1771,8 +1760,15 @@
 
     <!-- PRODUCTOS -->
     <section class="productos" id="productos">
-      <div class="section-label reveal">Tienda Online</div>
-      <h2 class="section-title reveal reveal-delay-1">NUESTROS<br />CAFÉS</h2>
+      <div class="section-label reveal" data-key="productos-label">
+        Tienda Online
+      </div>
+      <h2
+        class="section-title reveal reveal-delay-1"
+        data-key="productos-title"
+      >
+        NUESTROS<br />CAFÉS
+      </h2>
       <div class="productos-grid">
         <!-- Especial -->
         <div class="producto-card reveal">
@@ -1792,7 +1788,7 @@
           </div>
           <div class="producto-precio">$20.000 <span>COP · 340gr</span></div>
           <a
-            href="mailto:ventas.sigilo@gmail.com?subject=Pedido Café Especial"
+            href="/cdn-cgi/l/email-protection#5f293a312b3e2c712c36383633301f38323e3633713c3032602c2a3d353a3c2b620f3a3b363b307f1c3e399cf67f1a2c2f3a3c363e33"
             class="btn-comprar"
             >Pedir ahora →</a
           >
@@ -1814,7 +1810,7 @@
           </div>
           <div class="producto-precio">$25.000 <span>COP · 340gr</span></div>
           <a
-            href="mailto:ventas.sigilo@gmail.com?subject=Pedido Café Diferenciado"
+            href="/cdn-cgi/l/email-protection#1264777c6673613c617b757b7e7d52757f737b7e3c717d7f2d616770787771662f4277767b767d32517374d1bb32567b747760777c717b73767d"
             class="btn-comprar"
             >Pedir ahora →</a
           >
@@ -1836,7 +1832,7 @@
           </div>
           <div class="producto-precio">$4.000 <span>COP · ×1 und</span></div>
           <a
-            href="mailto:ventas.sigilo@gmail.com?subject=Pedido Drip Bags"
+            href="/cdn-cgi/l/email-protection#fb8d9e958f9a88d588929c929794bb9c969a9297d5989496c4888e99919e988fc6ab9e9f929f94dbbf89928bdbb99a9c88"
             class="btn-comprar"
             >Pedir ahora →</a
           >
@@ -1859,7 +1855,7 @@
           </div>
           <div class="producto-precio">$4.500 <span>COP · 125gr</span></div>
           <a
-            href="mailto:ventas.sigilo@gmail.com?subject=Pedido Infusión Cáscara"
+            href="/cdn-cgi/l/email-protection#6711020913061449140e000e0b0827000a060e0b4904080a581412050d0204135a3702030e0308472e090112140ea4d4094724a4c61404061506"
             class="btn-comprar"
             >Pedir ahora →</a
           >
@@ -1882,7 +1878,7 @@
           </div>
           <div class="producto-precio">$50.000 <span>COP · 2.5kg</span></div>
           <a
-            href="mailto:ventas.sigilo@gmail.com?subject=Pedido Línea Institucional"
+            href="/cdn-cgi/l/email-protection#c1b7a4afb5a0b2efb2a8a6a8adae81a6aca0a8adefa2aeacfeb2b4a3aba4a2b5fc91a4a5a8a5aee18d026cafa4a0e188afb2b5a8b5b4a2a8aeafa0ad"
             class="btn-comprar"
             >Contactar →</a
           >
@@ -1904,7 +1900,7 @@
           </div>
           <div class="producto-precio">$25.000 <span>COP · 340gr</span></div>
           <a
-            href="mailto:ventas.sigilo@gmail.com?subject=Pedido Honey Process"
+            href="/cdn-cgi/l/email-protection#2f594a415b4e5c015c46484643406f48424e4643014c4042105c5a4d454a4c5b127f4a4b464b400f6740414a560f7f5d404c4a5c5c"
             class="btn-comprar"
             >Pedir ahora →</a
           >
@@ -1915,9 +1911,13 @@
     <!-- TIENDA HERO -->
     <section class="tienda-hero" id="tienda">
       <div class="tienda-left">
-        <div class="section-label reveal">Pago seguro</div>
-        <h2 class="reveal reveal-delay-1">COMPRA<br />FÁCIL<br />Y RÁPIDO</h2>
-        <p class="tagline reveal reveal-delay-2">
+        <div class="section-label reveal" data-key="tienda-label">
+          Pago seguro
+        </div>
+        <h2 class="reveal reveal-delay-1" data-key="tienda-title">
+          COMPRA<br />FÁCIL<br />Y RÁPIDO
+        </h2>
+        <p class="tagline reveal reveal-delay-2" data-key="tienda-tagline">
           Aceptamos pagos con Wompi — la plataforma de pagos más segura de
           Colombia. Tarjetas, PSE, Nequi y más.
         </p>
@@ -1964,8 +1964,12 @@
 
     <!-- PROCESO -->
     <section class="proceso" id="proceso">
-      <div class="section-label reveal">De la tierra a tu taza</div>
-      <h2 class="section-title reveal reveal-delay-1">CÓMO<br />TRABAJAMOS</h2>
+      <div class="section-label reveal" data-key="proceso-label">
+        De la tierra a tu taza
+      </div>
+      <h2 class="section-title reveal reveal-delay-1" data-key="proceso-title">
+        CÓMO<br />TRABAJAMOS
+      </h2>
       <div class="proceso-steps">
         <div class="step reveal">
           <div class="step-num">01</div>
@@ -2012,8 +2016,10 @@
 
     <!-- INSTAGRAM -->
     <section class="instagram">
-      <div class="section-label">Síguenos</div>
-      <h2 class="section-title reveal">SIGILO EN<br />INSTAGRAM</h2>
+      <div class="section-label" data-key="ig-label">Síguenos</div>
+      <h2 class="section-title reveal" data-key="ig-title">
+        SIGILO EN<br />INSTAGRAM
+      </h2>
       <div class="instagram-handle reveal reveal-delay-1">@sigilo.col</div>
       <div class="ig-grid reveal reveal-delay-2">
         <div class="ig-item"><div class="ig-inner">SIGILO</div></div>
@@ -2036,8 +2042,13 @@
     <!-- NOSOTROS -->
     <section class="nosotros" id="nosotros">
       <div class="nosotros-text">
-        <div class="section-label reveal">Nuestra Historia</div>
-        <h2 class="section-title reveal reveal-delay-1">
+        <div class="section-label reveal" data-key="nosotros-label">
+          Nuestra Historia
+        </div>
+        <h2
+          class="section-title reveal reveal-delay-1"
+          data-key="nosotros-title"
+        >
           EL<br />SIGILO<br />DE LO<br />MEJOR
         </h2>
         <div class="nosotros-highlight reveal reveal-delay-2">
@@ -2051,7 +2062,7 @@
           vida del productor y su familia.
         </p>
         <a
-          href="mailto:ventas.sigilo@gmail.com"
+          href="/cdn-cgi/l/email-protection#8bfdeee5ffeaf8a5f8e2ece2e7e4cbece6eae2e7a5e8e4e6"
           class="btn-primary reveal reveal-delay-4"
           style="display: inline-flex; text-decoration: none; margin-top: 8px"
           ><span>Escríbenos</span></a
@@ -2070,8 +2081,8 @@
 
     <!-- CONTACTO -->
     <section class="contacto" id="contacto">
-      <h2 class="reveal">HABLEMOS<br />DE CAFÉ</h2>
-      <p class="contacto-sub reveal reveal-delay-1">
+      <h2 class="reveal" data-key="contacto-title">HABLEMOS<br />DE CAFÉ</h2>
+      <p class="contacto-sub reveal reveal-delay-1" data-key="contacto-sub">
         ¿Listo para descubrir el sabor que se esconde?
       </p>
       <div class="contacto-items">
@@ -2085,12 +2096,18 @@
           <div class="contacto-val">+57 301 510 9186</div>
         </a>
         <a
-          href="mailto:ventas.sigilo@gmail.com"
+          href="/cdn-cgi/l/email-protection#bbcdded5cfdac895c8d2dcd2d7d4fbdcd6dad2d795d8d4d6"
           class="contacto-item reveal reveal-delay-1"
         >
           <div class="contacto-icon">✉️</div>
           <div class="contacto-label">Email</div>
-          <div class="contacto-val">ventas.sigilo@gmail.com</div>
+          <div class="contacto-val">
+            <span
+              class="__cf_email__"
+              data-cfemail="d3a5b6bda7b2a0fda0bab4babfbc93b4beb2babffdb0bcbe"
+              >[email&#160;protected]</span
+            >
+          </div>
         </a>
         <a
           href="https://www.instagram.com/sigilo.col/"
@@ -2129,82 +2146,33 @@
           <h4>Contacto</h4>
           <ul>
             <li>
-              <a href="mailto:ventas.sigilo@gmail.com"
-                >ventas.sigilo@gmail.com</a
+              <a
+                href="/cdn-cgi/l/email-protection#fc8a9992889d8fd28f959b959093bc9b919d9590d29f9391"
+                ><span
+                  class="__cf_email__"
+                  data-cfemail="ea9c8f849e8b99c499838d838685aa8d878b8386c4898587"
+                  >[email&#160;protected]</span
+                ></a
               >
             </li>
-            <li><a href="https://wa.me/573204963699">+57 320 496 3699</a></li>
+            <li><a href="https://wa.me/573015109186">+57 301 510 9186</a></li>
             <li><a href="https://instagram.com/sigilo.col">@sigilo.col</a></li>
             <li><a href="#">Colombia</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© 2026 Sigilo.co · Specialty Coffee & Cacao Colombia</span>
+        <span>© 2025 Sigilo.co · Specialty Coffee & Cacao Colombia</span>
         <span
-          >Pagos seguros con <a>Wompi</a> · Facturación con <a>Siigo</a></span
+          >Pagos seguros con <a href="#">Wompi</a> · Facturación con
+          <a href="#">Siigo</a></span
         >
       </div>
     </footer>
 
-    <script>
-      // CURSOR
-      const cursor = document.getElementById("cursor");
-      const ring = document.getElementById("cursorRing");
-      let mx = 0,
-        my = 0,
-        rx = 0,
-        ry = 0;
-      document.addEventListener("mousemove", (e) => {
-        mx = e.clientX;
-        my = e.clientY;
-      });
-      function animCursor() {
-        cursor.style.left = mx + "px";
-        cursor.style.top = my + "px";
-        rx += (mx - rx) * 0.12;
-        ry += (my - ry) * 0.12;
-        ring.style.left = rx + "px";
-        ring.style.top = ry + "px";
-        requestAnimationFrame(animCursor);
-      }
-      animCursor();
-      document
-        .querySelectorAll(
-          "a, button, .linea-card, .producto-card, .tienda-item, .step",
-        )
-        .forEach((el) => {
-          el.addEventListener("mouseenter", () => {
-            cursor.style.width = "20px";
-            cursor.style.height = "20px";
-            ring.style.width = "56px";
-            ring.style.height = "56px";
-          });
-          el.addEventListener("mouseleave", () => {
-            cursor.style.width = "12px";
-            cursor.style.height = "12px";
-            ring.style.width = "36px";
-            ring.style.height = "36px";
-          });
-        });
-
-      // NAV SCROLL
-      const navbar = document.getElementById("navbar");
-      window.addEventListener("scroll", () => {
-        navbar.classList.toggle("scrolled", window.scrollY > 60);
-      });
-
-      // REVEAL ON SCROLL
-      const reveals = document.querySelectorAll(".reveal");
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => {
-            if (e.isIntersecting) e.target.classList.add("visible");
-          });
-        },
-        { threshold: 0.12 },
-      );
-      reveals.forEach((el) => observer.observe(el));
-    </script>
+    <script
+      data-cfasync="false"
+      src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
+    ></script>
   </body>
 </html>
