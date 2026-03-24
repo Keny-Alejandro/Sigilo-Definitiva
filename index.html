@@ -1,302 +1,2465 @@
-<!DOCTYPE html>
-<html lang="es-419">
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SIGILO — Specialty Coffee & Cacao · Colombia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
 
-<head>
-    <title>SIGILO</title>
+    <style>
+      :root {
+        --amarillo: #faaa2d;
+        --ladrillo: #d55928;
+        --negro: #0f0f0f;
+        --crema: #ede0c8;
+        --crema-claro: #f5edd8;
+        --crema-oscuro: #c8b99a;
+        --texto: #1a1410;
+      }
 
-    <script type="text/javascript">
-        function cambiarUbicacion(identificador) {
-            window.location.hash = identificador;
-            return false;
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: var(--negro);
+        color: var(--crema);
+        overflow-x: hidden;
+        cursor: none;
+      }
+
+      /* CURSOR */
+      .cursor {
+        width: 12px;
+        height: 12px;
+        background: var(--amarillo);
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        transition:
+          transform 0.1s ease,
+          width 0.3s,
+          height 0.3s,
+          background 0.3s;
+        mix-blend-mode: difference;
+      }
+      .cursor-ring {
+        width: 36px;
+        height: 36px;
+        border: 1px solid var(--amarillo);
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 9998;
+        transform: translate(-50%, -50%);
+        transition: all 0.15s ease;
+        opacity: 0.6;
+      }
+
+      /* NAV */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        padding: 24px 48px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        mix-blend-mode: normal;
+        transition:
+          background 0.4s,
+          padding 0.4s;
+      }
+      nav.scrolled {
+        background: rgba(15, 15, 15, 0.95);
+        backdrop-filter: blur(16px);
+        padding: 16px 48px;
+        border-bottom: 1px solid rgba(250, 170, 45, 0.15);
+      }
+      .nav-logo {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 28px;
+        letter-spacing: 6px;
+        color: var(--crema);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .nav-logo span {
+        color: var(--amarillo);
+      }
+      .nav-links {
+        display: flex;
+        gap: 36px;
+        list-style: none;
+      }
+      .nav-links a {
+        color: var(--crema);
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        opacity: 0.7;
+        transition:
+          opacity 0.3s,
+          color 0.3s;
+      }
+      .nav-links a:hover {
+        opacity: 1;
+        color: var(--amarillo);
+      }
+      .nav-cta {
+        background: var(--amarillo);
+        color: var(--negro) !important;
+        padding: 10px 24px;
+        border-radius: 2px;
+        opacity: 1 !important;
+        font-weight: 500;
+        transition: background 0.3s !important;
+      }
+      .nav-cta:hover {
+        background: var(--ladrillo) !important;
+        color: var(--crema) !important;
+      }
+
+      /* HERO */
+      .hero {
+        min-height: 100vh;
+        position: relative;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        background: var(--negro);
+      }
+      .hero-bg {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            ellipse 80% 60% at 70% 50%,
+            rgba(213, 89, 40, 0.12) 0%,
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse 60% 80% at 20% 80%,
+            rgba(250, 170, 45, 0.08) 0%,
+            transparent 60%
+          );
+      }
+      .hero-pattern {
+        position: absolute;
+        inset: 0;
+        opacity: 0.04;
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cellipse cx='20' cy='15' rx='8' ry='5' fill='%23FAAA2D'/%3E%3Cellipse cx='45' cy='35' rx='10' ry='6' fill='%23FAAA2D'/%3E%3Cellipse cx='10' cy='45' rx='6' ry='4' fill='%23FAAA2D'/%3E%3C/svg%3E");
+        background-size: 60px 60px;
+      }
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        padding: 0 8vw;
+        max-width: 900px;
+        opacity: 0;
+        transform: translateY(40px);
+        animation: heroIn 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+      }
+      @keyframes heroIn {
+        to {
+          opacity: 1;
+          transform: translateY(0);
         }
-    </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="js/popup.js"></script>
+      }
+      .hero-eyebrow {
+        font-size: 11px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: var(--amarillo);
+        margin-bottom: 24px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .hero-eyebrow::before {
+        content: "";
+        width: 40px;
+        height: 1px;
+        background: var(--amarillo);
+      }
+      .hero-title {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(80px, 14vw, 200px);
+        line-height: 0.88;
+        letter-spacing: -2px;
+        color: var(--crema);
+        margin-bottom: 0;
+      }
+      .hero-title .accent {
+        color: var(--amarillo);
+      }
+      .hero-title .stroke {
+        -webkit-text-stroke: 1px var(--crema);
+        color: transparent;
+      }
+      .hero-sub {
+        font-family: "Playfair Display", serif;
+        font-style: italic;
+        font-size: clamp(16px, 2vw, 22px);
+        color: var(--crema-oscuro);
+        margin-top: 32px;
+        margin-bottom: 48px;
+        max-width: 520px;
+        line-height: 1.6;
+      }
+      .hero-actions {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--amarillo);
+        color: var(--negro);
+        padding: 16px 36px;
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        text-decoration: none;
+        border: none;
+        cursor: none;
+        transition:
+          background 0.3s,
+          transform 0.3s;
+        position: relative;
+        overflow: hidden;
+      }
+      .btn-primary::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: var(--ladrillo);
+        transform: translateX(-100%);
+        transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .btn-primary:hover::after {
+        transform: translateX(0);
+      }
+      .btn-primary span {
+        position: relative;
+        z-index: 1;
+      }
+      .btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: transparent;
+        color: var(--crema);
+        padding: 16px 36px;
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        text-decoration: none;
+        border: 1px solid rgba(237, 224, 200, 0.3);
+        cursor: none;
+        transition:
+          border-color 0.3s,
+          color 0.3s;
+      }
+      .btn-secondary:hover {
+        border-color: var(--crema);
+        color: var(--crema);
+      }
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="shortcut icon" href="img/Icono.png">
+      .hero-right {
+        position: absolute;
+        right: 5vw;
+        top: 50%;
+        transform: translateY(-50%);
+        opacity: 0;
+        animation: heroRight 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.6s forwards;
+      }
+      @keyframes heroRight {
+        from {
+          opacity: 0;
+          transform: translateY(-50%) scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(-50%) scale(1);
+        }
+      }
+      .hero-logo-svg {
+        width: clamp(260px, 28vw, 420px);
+        filter: drop-shadow(0 0 80px rgba(250, 170, 45, 0.2));
+      }
 
-</head>
+      .hero-scroll {
+        position: absolute;
+        bottom: 48px;
+        left: 8vw;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 11px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--crema-oscuro);
+        opacity: 0;
+        animation: heroIn 1s ease 1.2s forwards;
+      }
+      .scroll-line {
+        width: 1px;
+        height: 60px;
+        background: linear-gradient(to bottom, var(--amarillo), transparent);
+        animation: scrollPulse 2s ease-in-out infinite;
+      }
+      @keyframes scrollPulse {
+        0%,
+        100% {
+          opacity: 0.4;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
 
-<body>
-    <header id="inicio">
-        <div class="logo">
-            <a href="#inicio"><img src="/img/Icono Barra.png" alt="Logo Sigilo"></a>
+      /* SECTION STYLES */
+      section {
+        position: relative;
+      }
+      .section-label {
+        font-size: 10px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: var(--amarillo);
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .section-label::before {
+        content: "";
+        width: 30px;
+        height: 1px;
+        background: var(--amarillo);
+      }
+      h2.section-title {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(48px, 7vw, 100px);
+        line-height: 0.9;
+        letter-spacing: -1px;
+      }
+
+      /* CONCEPTO */
+      .concepto {
+        background: var(--crema);
+        color: var(--negro);
+        padding: 120px 8vw;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+        align-items: center;
+        overflow: hidden;
+      }
+      .concepto .section-label {
+        color: var(--ladrillo);
+      }
+      .concepto .section-label::before {
+        background: var(--ladrillo);
+      }
+      .concepto h2 {
+        color: var(--negro);
+      }
+      .concepto-text {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(18px, 1.8vw, 24px);
+        line-height: 1.7;
+        color: #3a2e24;
+        margin-top: 24px;
+      }
+      .concepto-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1px;
+        background: var(--crema-oscuro);
+        margin-top: 40px;
+      }
+      .stat {
+        background: var(--crema);
+        padding: 28px;
+      }
+      .stat-num {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 52px;
+        color: var(--ladrillo);
+        line-height: 1;
+      }
+      .stat-label {
+        font-size: 12px;
+        letter-spacing: 1px;
+        color: #5a4a3a;
+        margin-top: 4px;
+      }
+      .concepto-visual {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .concepto-circle {
+        width: 380px;
+        height: 380px;
+        border-radius: 50%;
+        background: var(--negro);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .concepto-circle::before {
+        content: "";
+        position: absolute;
+        inset: -2px;
+        border-radius: 50%;
+        background: conic-gradient(
+          var(--amarillo),
+          var(--ladrillo),
+          var(--amarillo)
+        );
+        z-index: -1;
+      }
+      .concepto-circle-inner {
+        width: calc(100% - 4px);
+        height: calc(100% - 4px);
+        border-radius: 50%;
+        background: var(--negro);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .concepto-logo-big {
+        width: 240px;
+        opacity: 0.9;
+      }
+      .floating-bean {
+        position: absolute;
+        border-radius: 50%;
+        animation: floatBean 6s ease-in-out infinite;
+      }
+      .floating-bean:nth-child(1) {
+        width: 12px;
+        height: 12px;
+        background: var(--amarillo);
+        top: 10%;
+        right: 10%;
+        animation-delay: 0s;
+      }
+      .floating-bean:nth-child(2) {
+        width: 8px;
+        height: 8px;
+        background: var(--ladrillo);
+        bottom: 20%;
+        left: 5%;
+        animation-delay: 2s;
+      }
+      .floating-bean:nth-child(3) {
+        width: 16px;
+        height: 16px;
+        background: var(--crema-oscuro);
+        top: 30%;
+        left: -5%;
+        animation-delay: 4s;
+      }
+      @keyframes floatBean {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(180deg);
+        }
+      }
+
+      /* LINEAS DE PRODUCTO */
+      .lineas {
+        background: var(--negro);
+        padding: 120px 8vw;
+      }
+      .lineas-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 60px;
+        flex-wrap: wrap;
+        gap: 24px;
+      }
+      .lineas-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2px;
+      }
+      .linea-card {
+        position: relative;
+        padding: 48px 32px 40px;
+        cursor: none;
+        overflow: hidden;
+        transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        min-height: 440px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+      .linea-card:hover {
+        transform: translateY(-8px);
+        z-index: 2;
+      }
+      .linea-card.jaguar {
+        background: var(--amarillo);
+      }
+      .linea-card.ocelote {
+        background: var(--ladrillo);
+      }
+      .linea-card.tigrillo {
+        background: #2a2620;
+        border: 1px solid rgba(237, 224, 200, 0.1);
+      }
+      .linea-card.oncilla {
+        background: #c8a830;
+      }
+      .linea-pattern {
+        position: absolute;
+        inset: 0;
+        opacity: 0.15;
+        background-size: 60px 60px;
+      }
+      .jaguar .linea-pattern {
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cellipse cx='18' cy='12' rx='9' ry='6' fill='%23000'/%3E%3Cellipse cx='42' cy='30' rx='11' ry='7' fill='%23000'/%3E%3Cellipse cx='12' cy='46' rx='7' ry='5' fill='%23000'/%3E%3Cellipse cx='50' cy='52' rx='6' ry='4' fill='%23000'/%3E%3C/svg%3E");
+      }
+      .ocelote .linea-pattern {
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='5' y='8' width='22' height='8' rx='4' fill='%23fff'/%3E%3Crect x='32' y='28' width='18' height='7' rx='3' fill='%23fff'/%3E%3Crect x='8' y='42' width='14' height='6' rx='3' fill='%23fff'/%3E%3C/svg%3E");
+      }
+      .tigrillo .linea-pattern {
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 15 Q15 8 20 18 Q10 22 5 15Z' fill='%23EDE0C8'/%3E%3Cpath d='M35 35 Q45 28 50 38 Q40 42 35 35Z' fill='%23EDE0C8'/%3E%3Cpath d='M15 48 Q25 42 28 52 Q18 55 15 48Z' fill='%23EDE0C8'/%3E%3C/svg%3E");
+      }
+      .oncilla .linea-pattern {
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cellipse cx='15' cy='15' rx='7' ry='5' fill='%23000' opacity='0.4'/%3E%3Cellipse cx='40' cy='35' rx='8' ry='5' fill='%23000' opacity='0.4'/%3E%3Cellipse cx='20' cy='48' rx='5' ry='4' fill='%23000' opacity='0.4'/%3E%3C/svg%3E");
+      }
+      .linea-num {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 100px;
+        line-height: 1;
+        position: absolute;
+        top: 16px;
+        right: 24px;
+        opacity: 0.12;
+        color: var(--negro);
+      }
+      .tigrillo .linea-num {
+        color: var(--crema);
+      }
+      .linea-name {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 42px;
+        letter-spacing: 3px;
+        line-height: 1;
+        position: relative;
+        z-index: 1;
+        color: var(--negro);
+      }
+      .tigrillo .linea-name {
+        color: var(--crema);
+      }
+      .linea-desc {
+        font-size: 13px;
+        line-height: 1.6;
+        margin-top: 10px;
+        position: relative;
+        z-index: 1;
+        color: rgba(15, 15, 15, 0.75);
+        max-width: 200px;
+      }
+      .tigrillo .linea-desc {
+        color: rgba(237, 224, 200, 0.7);
+      }
+      .linea-tag {
+        display: inline-block;
+        margin-top: 20px;
+        font-size: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 6px 14px;
+        border: 1px solid rgba(15, 15, 15, 0.25);
+        position: relative;
+        z-index: 1;
+        color: var(--negro);
+      }
+      .tigrillo .linea-tag {
+        border-color: rgba(237, 224, 200, 0.25);
+        color: var(--crema);
+      }
+
+      /* PRODUCTOS */
+      .productos {
+        background: var(--crema-claro);
+        padding: 120px 8vw;
+        color: var(--negro);
+      }
+      .productos .section-label {
+        color: var(--ladrillo);
+      }
+      .productos .section-label::before {
+        background: var(--ladrillo);
+      }
+      .productos h2 {
+        color: var(--negro);
+        margin-bottom: 60px;
+      }
+      .productos-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        margin-top: 60px;
+      }
+      .producto-card {
+        background: var(--crema);
+        border: 1px solid var(--crema-oscuro);
+        padding: 40px 32px;
+        position: relative;
+        cursor: none;
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
+        overflow: hidden;
+      }
+      .producto-card::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: var(--amarillo);
+        transform: scaleX(0);
+        transition: transform 0.4s;
+        transform-origin: left;
+      }
+      .producto-card:hover::after {
+        transform: scaleX(1);
+      }
+      .producto-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 60px rgba(15, 15, 15, 0.12);
+      }
+      .producto-badge {
+        display: inline-block;
+        background: var(--ladrillo);
+        color: var(--crema);
+        font-size: 9px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 4px 10px;
+        margin-bottom: 20px;
+      }
+      .producto-name {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 36px;
+        letter-spacing: 2px;
+        color: var(--negro);
+        line-height: 1;
+        margin-bottom: 8px;
+      }
+      .producto-sub {
+        font-size: 11px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--ladrillo);
+        margin-bottom: 16px;
+      }
+      .producto-desc {
+        font-size: 14px;
+        line-height: 1.65;
+        color: #5a4a3a;
+        margin-bottom: 24px;
+      }
+      .notas-sabor {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 28px;
+      }
+      .nota {
+        background: var(--negro);
+        color: var(--crema);
+        font-size: 10px;
+        letter-spacing: 1px;
+        padding: 5px 12px;
+      }
+      .producto-precio {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 28px;
+        color: var(--negro);
+        margin-bottom: 16px;
+      }
+      .producto-precio span {
+        font-family: "DM Sans", sans-serif;
+        font-size: 13px;
+        color: #7a6a5a;
+        font-weight: 300;
+      }
+      .btn-comprar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        padding: 14px;
+        background: var(--negro);
+        color: var(--crema);
+        font-size: 11px;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        text-decoration: none;
+        border: none;
+        cursor: none;
+        transition: background 0.3s;
+      }
+      .btn-comprar:hover {
+        background: var(--ladrillo);
+      }
+      .producto-bg-num {
+        position: absolute;
+        top: -10px;
+        right: 16px;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 120px;
+        color: var(--crema-oscuro);
+        opacity: 0.3;
+        line-height: 1;
+        user-select: none;
+      }
+
+      /* TIENDA - DESTACADO */
+      .tienda-hero {
+        background: var(--negro);
+        padding: 0;
+        min-height: 80vh;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+      .tienda-left {
+        padding: 100px 6vw 100px 8vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: var(--ladrillo);
+        position: relative;
+        overflow: hidden;
+      }
+      .tienda-left::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' xmlns='http://www.w3.org/2000/svg'%3E%3Cellipse cx='25' cy='20' rx='12' ry='8' fill='%23000' opacity='0.08'/%3E%3Cellipse cx='60' cy='50' rx='14' ry='9' fill='%23000' opacity='0.08'/%3E%3Cellipse cx='15' cy='65' rx='9' ry='6' fill='%23000' opacity='0.08'/%3E%3C/svg%3E");
+        background-size: 80px 80px;
+      }
+      .tienda-left .section-label {
+        color: rgba(237, 224, 200, 0.7);
+      }
+      .tienda-left .section-label::before {
+        background: rgba(237, 224, 200, 0.5);
+      }
+      .tienda-left h2 {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(60px, 7vw, 96px);
+        line-height: 0.9;
+        color: var(--crema);
+        position: relative;
+      }
+      .tienda-left .tagline {
+        font-family: "Playfair Display", serif;
+        font-style: italic;
+        font-size: 18px;
+        color: rgba(237, 224, 200, 0.8);
+        margin-top: 24px;
+        margin-bottom: 40px;
+        line-height: 1.6;
+        max-width: 400px;
+        position: relative;
+      }
+      .wompi-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(0, 0, 0, 0.2);
+        padding: 10px 20px;
+        border-radius: 2px;
+        font-size: 12px;
+        letter-spacing: 1px;
+        color: var(--crema);
+        position: relative;
+        margin-top: 20px;
+      }
+      .wompi-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #2ecc71;
+        animation: pulse 2s ease-in-out infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.7;
+          transform: scale(1.3);
+        }
+      }
+      .tienda-right {
+        background: var(--crema-claro);
+        padding: 80px 6vw 80px 4vw;
+        display: grid;
+        grid-template-rows: repeat(3, 1fr);
+        gap: 16px;
+      }
+      .tienda-item {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        padding: 24px;
+        background: var(--crema);
+        border: 1px solid var(--crema-oscuro);
+        cursor: none;
+        transition: background 0.3s;
+      }
+      .tienda-item:hover {
+        background: var(--negro);
+      }
+      .tienda-item:hover .ti-name,
+      .tienda-item:hover .ti-desc {
+        color: var(--crema);
+      }
+      .tienda-item:hover .ti-price {
+        color: var(--amarillo);
+      }
+      .ti-icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 22px;
+      }
+      .ti-icon.j {
+        background: var(--amarillo);
+      }
+      .ti-icon.o {
+        background: var(--ladrillo);
+      }
+      .ti-icon.d {
+        background: var(--negro);
+      }
+      .ti-info {
+        flex: 1;
+      }
+      .ti-name {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 22px;
+        letter-spacing: 1px;
+        color: var(--negro);
+        transition: color 0.3s;
+      }
+      .ti-desc {
+        font-size: 12px;
+        color: #7a6a5a;
+        margin-top: 2px;
+        transition: color 0.3s;
+      }
+      .ti-price {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 22px;
+        color: var(--ladrillo);
+        transition: color 0.3s;
+      }
+
+      /* PROCESO */
+      .proceso {
+        background: var(--negro);
+        padding: 120px 8vw;
+      }
+      .proceso h2 {
+        color: var(--crema);
+        margin-bottom: 80px;
+      }
+      .proceso-steps {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0;
+        border: 1px solid rgba(237, 224, 200, 0.1);
+      }
+      .step {
+        padding: 48px 32px;
+        border-right: 1px solid rgba(237, 224, 200, 0.1);
+        position: relative;
+        overflow: hidden;
+        transition: background 0.4s;
+      }
+      .step:last-child {
+        border-right: none;
+      }
+      .step:hover {
+        background: rgba(250, 170, 45, 0.05);
+      }
+      .step-num {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 80px;
+        color: rgba(250, 170, 45, 0.12);
+        line-height: 1;
+        margin-bottom: 16px;
+      }
+      .step-icon {
+        font-size: 28px;
+        margin-bottom: 16px;
+      }
+      .step-title {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 28px;
+        letter-spacing: 2px;
+        color: var(--crema);
+        margin-bottom: 12px;
+      }
+      .step-desc {
+        font-size: 13px;
+        line-height: 1.65;
+        color: rgba(237, 224, 200, 0.55);
+      }
+      .step-bar {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--amarillo);
+        transform: scaleX(0);
+        transition: transform 0.4s;
+        transform-origin: left;
+      }
+      .step:hover .step-bar {
+        transform: scaleX(1);
+      }
+
+      /* INSTAGRAM */
+      .instagram {
+        background: var(--crema);
+        padding: 100px 8vw;
+        color: var(--negro);
+        text-align: center;
+      }
+      .instagram .section-label {
+        justify-content: center;
+        color: var(--ladrillo);
+      }
+      .instagram .section-label::before {
+        display: none;
+      }
+      .instagram h2 {
+        color: var(--negro);
+        margin-bottom: 12px;
+      }
+      .instagram-handle {
+        font-family: "Playfair Display", serif;
+        font-style: italic;
+        font-size: 20px;
+        color: var(--ladrillo);
+        margin-bottom: 56px;
+      }
+      .ig-grid {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 4px;
+        margin-bottom: 48px;
+      }
+      .ig-item {
+        aspect-ratio: 1;
+        background: var(--negro);
+        overflow: hidden;
+        cursor: none;
+        position: relative;
+      }
+      .ig-item::after {
+        content: "♥";
+        position: absolute;
+        inset: 0;
+        background: rgba(213, 89, 40, 0.85);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        color: var(--crema);
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .ig-item:hover::after {
+        opacity: 1;
+      }
+      .ig-inner {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 14px;
+        letter-spacing: 2px;
+        color: rgba(237, 224, 200, 0.3);
+      }
+      .ig-item:nth-child(1) {
+        background: #3a2e20;
+      }
+      .ig-item:nth-child(2) {
+        background: #1a1208;
+      }
+      .ig-item:nth-child(3) {
+        background: #4a3010;
+      }
+      .ig-item:nth-child(4) {
+        background: #2a1808;
+      }
+      .ig-item:nth-child(5) {
+        background: #3a2010;
+      }
+      .ig-item:nth-child(6) {
+        background: #1a1205;
+      }
+
+      /* NOSOTROS */
+      .nosotros {
+        background: var(--negro);
+        padding: 120px 8vw;
+        display: grid;
+        grid-template-columns: 1fr 1.4fr;
+        gap: 80px;
+        align-items: center;
+      }
+      .nosotros-text h2 {
+        margin-bottom: 24px;
+      }
+      .nosotros-body {
+        font-size: 16px;
+        line-height: 1.8;
+        color: rgba(237, 224, 200, 0.7);
+        margin-bottom: 24px;
+      }
+      .nosotros-highlight {
+        font-family: "Playfair Display", serif;
+        font-style: italic;
+        font-size: 22px;
+        color: var(--crema);
+        border-left: 3px solid var(--amarillo);
+        padding-left: 24px;
+        margin: 32px 0;
+        line-height: 1.6;
+      }
+      .nosotros-visual {
+        position: relative;
+      }
+      .nosotros-img-container {
+        position: relative;
+        overflow: hidden;
+      }
+      .nosotros-img-placeholder {
+        width: 100%;
+        aspect-ratio: 4/5;
+        background: linear-gradient(
+          135deg,
+          #2a1808 0%,
+          #4a3020 50%,
+          #1a0f05 100%
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 18px;
+        letter-spacing: 4px;
+        color: rgba(237, 224, 200, 0.2);
+      }
+      .nosotros-badge {
+        position: absolute;
+        bottom: -20px;
+        right: -20px;
+        width: 140px;
+        height: 140px;
+        background: var(--amarillo);
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+        animation: rotateBadge 12s linear infinite;
+      }
+      .badge-text {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 13px;
+        letter-spacing: 2px;
+        color: var(--negro);
+        text-align: center;
+        line-height: 1.2;
+      }
+      .badge-num {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 36px;
+        color: var(--negro);
+        line-height: 1;
+      }
+      @keyframes rotateBadge {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* CONTACTO */
+      .contacto {
+        background: var(--ladrillo);
+        padding: 100px 8vw;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .contacto::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cellipse cx='30' cy='25' rx='15' ry='10' fill='%23000' opacity='0.06'/%3E%3Cellipse cx='75' cy='60' rx='18' ry='12' fill='%23000' opacity='0.06'/%3E%3Cellipse cx='20' cy='80' rx='12' ry='8' fill='%23000' opacity='0.06'/%3E%3C/svg%3E");
+        background-size: 100px 100px;
+      }
+      .contacto h2 {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(60px, 10vw, 120px);
+        line-height: 0.9;
+        color: var(--crema);
+        margin-bottom: 24px;
+        position: relative;
+      }
+      .contacto-sub {
+        font-family: "Playfair Display", serif;
+        font-style: italic;
+        font-size: 20px;
+        color: rgba(237, 224, 200, 0.8);
+        margin-bottom: 48px;
+        position: relative;
+      }
+      .contacto-items {
+        display: flex;
+        justify-content: center;
+        gap: 48px;
+        flex-wrap: wrap;
+        position: relative;
+      }
+      .contacto-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
+        color: var(--crema);
+        transition: transform 0.3s;
+        cursor: none;
+      }
+      .contacto-item:hover {
+        transform: translateY(-4px);
+      }
+      .contacto-icon {
+        width: 56px;
+        height: 56px;
+        border: 1px solid rgba(237, 224, 200, 0.4);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        transition:
+          background 0.3s,
+          border-color 0.3s;
+      }
+      .contacto-item:hover .contacto-icon {
+        background: var(--crema);
+        border-color: var(--crema);
+        color: var(--ladrillo);
+      }
+      .contacto-label {
+        font-size: 11px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        opacity: 0.7;
+      }
+      .contacto-val {
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      /* FOOTER */
+      footer {
+        background: var(--negro);
+        padding: 60px 8vw 40px;
+        border-top: 1px solid rgba(237, 224, 200, 0.08);
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 60px;
+        margin-bottom: 48px;
+      }
+      .footer-brand h3 {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 36px;
+        letter-spacing: 4px;
+        color: var(--crema);
+        margin-bottom: 12px;
+      }
+      .footer-brand p {
+        font-size: 13px;
+        line-height: 1.7;
+        color: rgba(237, 224, 200, 0.45);
+        max-width: 300px;
+      }
+      .footer-col h4 {
+        font-size: 10px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--amarillo);
+        margin-bottom: 20px;
+      }
+      .footer-col ul {
+        list-style: none;
+      }
+      .footer-col ul li {
+        margin-bottom: 10px;
+      }
+      .footer-col ul a {
+        font-size: 13px;
+        color: rgba(237, 224, 200, 0.45);
+        text-decoration: none;
+        transition: color 0.3s;
+        cursor: none;
+      }
+      .footer-col ul a:hover {
+        color: var(--crema);
+      }
+      .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 24px;
+        border-top: 1px solid rgba(237, 224, 200, 0.08);
+        font-size: 12px;
+        color: rgba(237, 224, 200, 0.25);
+      }
+      .footer-bottom a {
+        color: var(--amarillo);
+        text-decoration: none;
+      }
+
+      /* SCROLL ANIMATIONS */
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition:
+          opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+          transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .reveal-delay-1 {
+        transition-delay: 0.1s;
+      }
+      .reveal-delay-2 {
+        transition-delay: 0.2s;
+      }
+      .reveal-delay-3 {
+        transition-delay: 0.3s;
+      }
+      .reveal-delay-4 {
+        transition-delay: 0.4s;
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 768px) {
+        nav {
+          padding: 20px 24px;
+        }
+        nav.scrolled {
+          padding: 12px 24px;
+        }
+        .nav-links {
+          display: none;
+        }
+        .hero-content {
+          padding: 0 6vw;
+        }
+        .hero-right {
+          display: none;
+        }
+        .concepto {
+          grid-template-columns: 1fr;
+          padding: 80px 6vw;
+          gap: 48px;
+        }
+        .lineas-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .productos-grid {
+          grid-template-columns: 1fr;
+        }
+        .tienda-hero {
+          grid-template-columns: 1fr;
+        }
+        .proceso-steps {
+          grid-template-columns: 1fr 1fr;
+        }
+        .nosotros {
+          grid-template-columns: 1fr;
+        }
+        .ig-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .footer-grid {
+          grid-template-columns: 1fr;
+          gap: 32px;
+        }
+        .footer-bottom {
+          flex-direction: column;
+          gap: 12px;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- CURSOR -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- NAV -->
+    <nav id="navbar">
+      <a href="#" class="nav-logo">
+        <svg
+          width="32"
+          height="32"
+          viewBox="0 0 100 100"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <ellipse
+            cx="50"
+            cy="25"
+            rx="28"
+            ry="20"
+            stroke="#EDE0C8"
+            stroke-width="3"
+            fill="none"
+          />
+          <ellipse
+            cx="32"
+            cy="22"
+            rx="10"
+            ry="14"
+            stroke="#EDE0C8"
+            stroke-width="2.5"
+            fill="none"
+          />
+          <ellipse
+            cx="68"
+            cy="22"
+            rx="10"
+            ry="14"
+            stroke="#EDE0C8"
+            stroke-width="2.5"
+            fill="none"
+          />
+          <ellipse cx="40" cy="44" rx="8" ry="5" fill="#EDE0C8" />
+          <ellipse cx="60" cy="44" rx="8" ry="5" fill="#EDE0C8" />
+          <path
+            d="M35 60 Q50 72 65 60"
+            stroke="#EDE0C8"
+            stroke-width="2.5"
+            fill="none"
+          />
+          <path
+            d="M25 58 Q18 65 22 72"
+            stroke="#EDE0C8"
+            stroke-width="2.5"
+            fill="none"
+          />
+          <path
+            d="M75 58 Q82 65 78 72"
+            stroke="#EDE0C8"
+            stroke-width="2.5"
+            fill="none"
+          />
+        </svg>
+        SIGILO<span>.CO</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#lineas">Líneas</a></li>
+        <li><a href="#productos">Productos</a></li>
+        <li><a href="#proceso">Proceso</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#contacto" class="nav-cta">Comprar</a></li>
+      </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-pattern"></div>
+      <div class="hero-content">
+        <div class="hero-eyebrow">Specialty Coffee & Cacao · Colombia</div>
+        <h1 class="hero-title">
+          <div>EL</div>
+          <div class="accent">SABOR</div>
+          <div class="stroke">QUE SE</div>
+          <div>OCULTA</div>
+        </h1>
+        <p class="hero-sub">
+          Café y cacao de especialidad colombiano. Trabajamos directamente con
+          nuestros productores para llevar lo mejor del campo a tu taza.
+        </p>
+        <div class="hero-actions">
+          <a href="#productos" class="btn-primary"
+            ><span>Ver Productos</span></a
+          >
+          <a href="#nosotros" class="btn-secondary">Nuestra Historia</a>
         </div>
-        <nav>
-            <a href="#historia" onclick="cambiarUbicacion('historia')">SOBRE NOSOTROS</a>
-            <a href="#productosh" onclick="cambiarUbicacion('productosh')">PRODUCTOS</a>
-            <a href="#verdeh" onclick="cambiarUbicacion('verdeh')">CAFÉ VERDE</a>
-            <a href="#contactoh" onclick="cambiarUbicacion('contactoh')">CONTÁCTANOS</a>
-            <a href="carrito.html" target="_blank"><img src="/img/Carrito.png" alt="Carrito de Compras"></img></a>
-        </nav>
-    </header>
-    <div class="whatsapp">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-        <a href="https://api.whatsapp.com/send?phone=573204963699&text=Hola%2C%20quiero%20atenci%C3%B3n%20personalizada.%20%E2%98%95"
-            class="float" target="_blank">
-            <i class="fa fa-whatsapp my-float"></i>
+      </div>
+      <div class="hero-right">
+        <svg
+          class="hero-logo-svg"
+          viewBox="0 0 400 460"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <!-- Orejitas -->
+          <path
+            d="M110 200 Q90 130 130 90 Q150 150 160 190"
+            stroke="#EDE0C8"
+            stroke-width="3"
+            fill="rgba(237,224,200,0.05)"
+          />
+          <path
+            d="M290 200 Q310 130 270 90 Q250 150 240 190"
+            stroke="#EDE0C8"
+            stroke-width="3"
+            fill="rgba(237,224,200,0.05)"
+          />
+          <!-- Puntos orejita izquierda -->
+          <circle cx="105" cy="140" r="4" fill="#EDE0C8" opacity="0.6" />
+          <circle cx="115" cy="120" r="3.5" fill="#EDE0C8" opacity="0.5" />
+          <circle cx="128" cy="105" r="3" fill="#EDE0C8" opacity="0.4" />
+          <circle cx="120" cy="155" r="3" fill="#EDE0C8" opacity="0.5" />
+          <circle cx="133" cy="135" r="2.5" fill="#EDE0C8" opacity="0.4" />
+          <!-- Puntos orejita derecha -->
+          <circle cx="295" cy="140" r="4" fill="#EDE0C8" opacity="0.6" />
+          <circle cx="285" cy="120" r="3.5" fill="#EDE0C8" opacity="0.5" />
+          <circle cx="272" cy="105" r="3" fill="#EDE0C8" opacity="0.4" />
+          <circle cx="280" cy="155" r="3" fill="#EDE0C8" opacity="0.5" />
+          <circle cx="267" cy="135" r="2.5" fill="#EDE0C8" opacity="0.4" />
+          <!-- Cara principal - contorno ovalado -->
+          <ellipse
+            cx="200"
+            cy="230"
+            rx="130"
+            ry="110"
+            stroke="#EDE0C8"
+            stroke-width="3"
+            fill="rgba(237,224,200,0.03)"
+          />
+          <!-- Manchas jaguar - lado izquierdo -->
+          <ellipse
+            cx="115"
+            cy="195"
+            rx="9"
+            ry="6"
+            fill="#EDE0C8"
+            opacity="0.5"
+          />
+          <ellipse
+            cx="100"
+            cy="215"
+            rx="7"
+            ry="5"
+            fill="#EDE0C8"
+            opacity="0.4"
+          />
+          <ellipse
+            cx="120"
+            cy="230"
+            rx="8"
+            ry="5"
+            fill="#EDE0C8"
+            opacity="0.4"
+          />
+          <ellipse
+            cx="105"
+            cy="248"
+            rx="6"
+            ry="4"
+            fill="#EDE0C8"
+            opacity="0.35"
+          />
+          <ellipse
+            cx="125"
+            cy="262"
+            rx="7"
+            ry="5"
+            fill="#EDE0C8"
+            opacity="0.35"
+          />
+          <ellipse
+            cx="140"
+            cy="200"
+            rx="7"
+            ry="5"
+            fill="#EDE0C8"
+            opacity="0.4"
+          />
+          <ellipse
+            cx="135"
+            cy="218"
+            rx="6"
+            ry="4"
+            fill="#EDE0C8"
+            opacity="0.35"
+          />
+          <!-- Manchas jaguar - frente superior -->
+          <ellipse
+            cx="170"
+            cy="185"
+            rx="7"
+            ry="5"
+            fill="#EDE0C8"
+            opacity="0.4"
+          />
+          <ellipse
+            cx="200"
+            cy="180"
+            rx="7"
+            ry="5"
+            fill="#EDE0C8"
+            opacity="0.4"
+          />
+          <ellipse
+            cx="230"
+            cy="185"
+            rx="7"
+            ry="5"
+            fill="#EDE0C8"
+            opacity="0.4"
+          />
+          <ellipse
+            cx="185"
+            cy="200"
+            rx="6"
+            ry="4"
+            fill="#EDE0C8"
+            opacity="0.35"
+          />
+          <ellipse
+            cx="215"
+            cy="200"
+            rx="6"
+            ry="4"
+            fill="#EDE0C8"
+            opacity="0.35"
+          />
+          <!-- Manchas jaguar - lado derecho -->
+          <ellipse
+            cx="285"
+            cy="195"
+            rx="9"
+            ry="6"
+            fill="#EDE0C8"
+            opacity="0.5"
+          />
+          <ellipse
+            cx="300"
+            cy="215"
+            rx="7"
+            ry="5"
+            fill="#EDE0C8"
+            opacity="0.4"
+          />
+          <ellipse
+            cx="280"
+            cy="230"
+            rx="8"
+            ry="5"
+            fill="#EDE0C8"
+            opacity="0.4"
+          />
+          <ellipse
+            cx="295"
+            cy="248"
+            rx="6"
+            ry="4"
+            fill="#EDE0C8"
+            opacity="0.35"
+          />
+          <ellipse
+            cx="275"
+            cy="262"
+            rx="7"
+            ry="5"
+            fill="#EDE0C8"
+            opacity="0.35"
+          />
+          <ellipse
+            cx="260"
+            cy="200"
+            rx="7"
+            ry="5"
+            fill="#EDE0C8"
+            opacity="0.4"
+          />
+          <ellipse
+            cx="265"
+            cy="218"
+            rx="6"
+            ry="4"
+            fill="#EDE0C8"
+            opacity="0.35"
+          />
+          <!-- Ojos -->
+          <rect x="148" y="222" width="50" height="32" rx="16" fill="#EDE0C8" />
+          <ellipse cx="173" cy="238" rx="10" ry="12" fill="#0F0F0F" />
+          <rect x="202" y="222" width="50" height="32" rx="16" fill="#EDE0C8" />
+          <ellipse cx="227" cy="238" rx="10" ry="12" fill="#0F0F0F" />
+          <!-- Nariz área -->
+          <line
+            x1="200"
+            y1="185"
+            x2="200"
+            y2="280"
+            stroke="#EDE0C8"
+            stroke-width="1.5"
+            opacity="0.3"
+          />
+          <!-- Nariz -->
+          <ellipse
+            cx="200"
+            cy="275"
+            rx="8"
+            ry="6"
+            fill="#EDE0C8"
+            opacity="0.8"
+          />
+          <!-- Bigotes / hojas de cacao/café -->
+          <path
+            d="M130 300 Q165 290 200 295 Q165 320 130 300Z"
+            stroke="#EDE0C8"
+            stroke-width="2"
+            fill="rgba(237,224,200,0.08)"
+          />
+          <path
+            d="M270 300 Q235 290 200 295 Q235 320 270 300Z"
+            stroke="#EDE0C8"
+            stroke-width="2"
+            fill="rgba(237,224,200,0.08)"
+          />
+          <path
+            d="M155 320 Q178 308 200 315 Q178 335 155 320Z"
+            stroke="#EDE0C8"
+            stroke-width="2"
+            fill="rgba(237,224,200,0.08)"
+          />
+          <path
+            d="M245 320 Q222 308 200 315 Q222 335 245 320Z"
+            stroke="#EDE0C8"
+            stroke-width="2"
+            fill="rgba(237,224,200,0.08)"
+          />
+          <!-- Texto SIGILO -->
+          <text
+            x="200"
+            y="420"
+            font-family="Arial Black"
+            font-size="52"
+            font-weight="900"
+            fill="#EDE0C8"
+            text-anchor="middle"
+            letter-spacing="8"
+          >
+            SIGILO
+          </text>
+        </svg>
+      </div>
+      <div class="hero-scroll">
+        <div class="scroll-line"></div>
+        Scroll
+      </div>
+    </section>
+
+    <!-- CONCEPTO -->
+    <section class="concepto" id="nosotros-preview">
+      <div class="reveal">
+        <div class="section-label">La Marca</div>
+        <h2 class="section-title">EL<br />SIGILO<br />ES UN<br />ARTE</h2>
+        <p class="concepto-text">
+          Un nuevo reto para los consumidores de café y cacao colombiano. Una
+          propuesta atrevida y asertiva como un felino al cazar.
+        </p>
+        <div class="concepto-stats">
+          <div class="stat reveal reveal-delay-1">
+            <div class="stat-num">4</div>
+            <div class="stat-label">Líneas de producto</div>
+          </div>
+          <div class="stat reveal reveal-delay-2">
+            <div class="stat-num">100%</div>
+            <div class="stat-label">Origen colombiano</div>
+          </div>
+          <div class="stat reveal reveal-delay-3">
+            <div class="stat-num">farm</div>
+            <div class="stat-label">to cup directo</div>
+          </div>
+          <div class="stat reveal reveal-delay-4">
+            <div class="stat-num">∞</div>
+            <div class="stat-label">Perfiles de sabor</div>
+          </div>
+        </div>
+      </div>
+      <div class="concepto-visual reveal reveal-delay-2">
+        <div class="floating-bean"></div>
+        <div class="floating-bean"></div>
+        <div class="floating-bean"></div>
+        <div class="concepto-circle">
+          <div class="concepto-circle-inner">
+            <svg class="concepto-logo-big" viewBox="0 0 300 340" fill="none">
+              <path
+                d="M80 155 Q65 100 100 65 Q115 115 125 150"
+                stroke="#EDE0C8"
+                stroke-width="2.5"
+                fill="rgba(237,224,200,0.05)"
+              />
+              <path
+                d="M220 155 Q235 100 200 65 Q185 115 175 150"
+                stroke="#EDE0C8"
+                stroke-width="2.5"
+                fill="rgba(237,224,200,0.05)"
+              />
+              <circle cx="78" cy="105" r="3.5" fill="#EDE0C8" opacity="0.6" />
+              <circle cx="88" cy="88" r="3" fill="#EDE0C8" opacity="0.5" />
+              <circle cx="100" cy="75" r="2.5" fill="#EDE0C8" opacity="0.4" />
+              <circle cx="90" cy="120" r="2.5" fill="#EDE0C8" opacity="0.5" />
+              <circle cx="222" cy="105" r="3.5" fill="#EDE0C8" opacity="0.6" />
+              <circle cx="212" cy="88" r="3" fill="#EDE0C8" opacity="0.5" />
+              <circle cx="200" cy="75" r="2.5" fill="#EDE0C8" opacity="0.4" />
+              <circle cx="210" cy="120" r="2.5" fill="#EDE0C8" opacity="0.5" />
+              <ellipse
+                cx="150"
+                cy="180"
+                rx="100"
+                ry="88"
+                stroke="#EDE0C8"
+                stroke-width="2.5"
+                fill="rgba(237,224,200,0.02)"
+              />
+              <ellipse
+                cx="90"
+                cy="152"
+                rx="7"
+                ry="5"
+                fill="#EDE0C8"
+                opacity="0.45"
+              />
+              <ellipse
+                cx="78"
+                cy="168"
+                rx="5.5"
+                ry="4"
+                fill="#EDE0C8"
+                opacity="0.35"
+              />
+              <ellipse
+                cx="95"
+                cy="182"
+                rx="6"
+                ry="4"
+                fill="#EDE0C8"
+                opacity="0.35"
+              />
+              <ellipse
+                cx="125"
+                cy="145"
+                rx="5.5"
+                ry="4"
+                fill="#EDE0C8"
+                opacity="0.35"
+              />
+              <ellipse
+                cx="135"
+                cy="160"
+                rx="5"
+                ry="3.5"
+                fill="#EDE0C8"
+                opacity="0.3"
+              />
+              <ellipse
+                cx="150"
+                cy="140"
+                rx="5.5"
+                ry="4"
+                fill="#EDE0C8"
+                opacity="0.35"
+              />
+              <ellipse
+                cx="165"
+                cy="155"
+                rx="5"
+                ry="3.5"
+                fill="#EDE0C8"
+                opacity="0.3"
+              />
+              <ellipse
+                cx="210"
+                cy="152"
+                rx="7"
+                ry="5"
+                fill="#EDE0C8"
+                opacity="0.45"
+              />
+              <ellipse
+                cx="222"
+                cy="168"
+                rx="5.5"
+                ry="4"
+                fill="#EDE0C8"
+                opacity="0.35"
+              />
+              <ellipse
+                cx="205"
+                cy="182"
+                rx="6"
+                ry="4"
+                fill="#EDE0C8"
+                opacity="0.35"
+              />
+              <ellipse
+                cx="175"
+                cy="145"
+                rx="5.5"
+                ry="4"
+                fill="#EDE0C8"
+                opacity="0.35"
+              />
+              <rect
+                x="108"
+                y="175"
+                width="38"
+                height="25"
+                rx="12"
+                fill="#EDE0C8"
+              />
+              <ellipse cx="127" cy="187" rx="8" ry="9" fill="#0F0F0F" />
+              <rect
+                x="154"
+                y="175"
+                width="38"
+                height="25"
+                rx="12"
+                fill="#EDE0C8"
+              />
+              <ellipse cx="173" cy="187" rx="8" ry="9" fill="#0F0F0F" />
+              <line
+                x1="150"
+                y1="142"
+                x2="150"
+                y2="225"
+                stroke="#EDE0C8"
+                stroke-width="1"
+                opacity="0.25"
+              />
+              <ellipse
+                cx="150"
+                cy="222"
+                rx="6"
+                ry="5"
+                fill="#EDE0C8"
+                opacity="0.75"
+              />
+              <path
+                d="M93 238 Q122 226 150 233 Q122 256 93 238Z"
+                stroke="#EDE0C8"
+                stroke-width="1.8"
+                fill="rgba(237,224,200,0.07)"
+              />
+              <path
+                d="M207 238 Q178 226 150 233 Q178 256 207 238Z"
+                stroke="#EDE0C8"
+                stroke-width="1.8"
+                fill="rgba(237,224,200,0.07)"
+              />
+              <path
+                d="M113 254 Q132 243 150 249 Q132 267 113 254Z"
+                stroke="#EDE0C8"
+                stroke-width="1.8"
+                fill="rgba(237,224,200,0.07)"
+              />
+              <path
+                d="M187 254 Q168 243 150 249 Q168 267 187 254Z"
+                stroke="#EDE0C8"
+                stroke-width="1.8"
+                fill="rgba(237,224,200,0.07)"
+              />
+              <text
+                x="150"
+                y="320"
+                font-family="Arial Black"
+                font-size="36"
+                font-weight="900"
+                fill="#EDE0C8"
+                text-anchor="middle"
+                letter-spacing="6"
+              >
+                SIGILO
+              </text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LINEAS -->
+    <section class="lineas" id="lineas">
+      <div class="lineas-header">
+        <div>
+          <div class="section-label reveal">Nuestras Líneas</div>
+          <h2 class="section-title reveal reveal-delay-1">
+            CUATRO<br />FELINOS
+          </h2>
+        </div>
+        <p
+          class="reveal reveal-delay-2"
+          style="
+            max-width: 360px;
+            font-size: 14px;
+            line-height: 1.7;
+            color: rgba(237, 224, 200, 0.55);
+          "
+        >
+          Cuatro especies de felinos colombianos, cuatro perfiles de sabor
+          únicos. Cada línea es una experiencia distinta.
+        </p>
+      </div>
+      <div class="lineas-grid">
+        <div class="linea-card jaguar reveal">
+          <div class="linea-pattern"></div>
+          <div class="linea-num">01</div>
+          <div class="linea-name">JAGUAR</div>
+          <div class="linea-desc">
+            El más poderoso. Perfiles intensos y complejos, cuerpo robusto.
+          </div>
+          <div class="linea-tag">Intensidad máxima</div>
+        </div>
+        <div class="linea-card ocelote reveal reveal-delay-1">
+          <div class="linea-pattern"></div>
+          <div class="linea-num">02</div>
+          <div class="linea-name">OCELOTE</div>
+          <div class="linea-desc">
+            Elegante y versátil. Notas frutales y acidez brillante.
+          </div>
+          <div class="linea-tag">Dulce & frutal</div>
+        </div>
+        <div class="linea-card tigrillo reveal reveal-delay-2">
+          <div class="linea-pattern"></div>
+          <div class="linea-num">03</div>
+          <div class="linea-name">TIGRILLO</div>
+          <div class="linea-desc">
+            Misterioso y profundo. Notas oscuras con un final sorprendente.
+          </div>
+          <div class="linea-tag">Dark & misterioso</div>
+        </div>
+        <div class="linea-card oncilla reveal reveal-delay-3">
+          <div class="linea-pattern"></div>
+          <div class="linea-num">04</div>
+          <div class="linea-name">ONCILLA</div>
+          <div class="linea-desc">
+            El más delicado. Suave, dulce y de fácil acceso para todos.
+          </div>
+          <div class="linea-tag">Suave & accesible</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCTOS -->
+    <section class="productos" id="productos">
+      <div class="section-label reveal">Tienda Online</div>
+      <h2 class="section-title reveal reveal-delay-1">NUESTROS<br />CAFÉS</h2>
+      <div class="productos-grid">
+        <!-- Especial -->
+        <div class="producto-card reveal">
+          <div class="producto-bg-num">01</div>
+          <div class="producto-badge">Más popular</div>
+          <div class="producto-name">ESPECIAL</div>
+          <div class="producto-sub">Línea Especial · 340gr</div>
+          <div class="producto-desc">
+            La esencia del café 100% colombiano. Un lavado tradicional perfecto
+            para el hogar o trabajo. Con sentido patrio.
+          </div>
+          <div class="notas-sabor">
+            <span class="nota">Cítrico</span>
+            <span class="nota">Caramelo</span>
+            <span class="nota">Chocolate</span>
+            <span class="nota">Amielado</span>
+          </div>
+          <div class="producto-precio">$20.000 <span>COP · 340gr</span></div>
+          <a
+            href="mailto:ventas.sigilo@gmail.com?subject=Pedido Café Especial"
+            class="btn-comprar"
+            >Pedir ahora →</a
+          >
+        </div>
+        <!-- Diferenciado -->
+        <div class="producto-card reveal reveal-delay-1">
+          <div class="producto-bg-num">02</div>
+          <div class="producto-badge">Specialty</div>
+          <div class="producto-name">DIFEREN-<br />CIADO</div>
+          <div class="producto-sub">Línea Diferenciado · 340gr</div>
+          <div class="producto-desc">
+            Para momentos especiales. Disponible en Honey Rojo, Natural y Suave
+            Lavado. Una experiencia sensorial única.
+          </div>
+          <div class="notas-sabor">
+            <span class="nota">Honey</span>
+            <span class="nota">Natural</span>
+            <span class="nota">Lavado</span>
+          </div>
+          <div class="producto-precio">$25.000 <span>COP · 340gr</span></div>
+          <a
+            href="mailto:ventas.sigilo@gmail.com?subject=Pedido Café Diferenciado"
+            class="btn-comprar"
+            >Pedir ahora →</a
+          >
+        </div>
+        <!-- Drip -->
+        <div class="producto-card reveal reveal-delay-2">
+          <div class="producto-bg-num">03</div>
+          <div class="producto-badge">Nuevo</div>
+          <div class="producto-name">DRIP<br />BAGS</div>
+          <div class="producto-sub">Portable · Listo en 90 seg</div>
+          <div class="producto-desc">
+            ¿Sin tiempo para un café? Nuestros drips tienen la medida exacta de
+            un pocillo. Solo agua caliente y listo en 1min 30seg.
+          </div>
+          <div class="notas-sabor">
+            <span class="nota">Portable</span>
+            <span class="nota">Premium</span>
+            <span class="nota">x1 o x3</span>
+          </div>
+          <div class="producto-precio">$4.000 <span>COP · ×1 und</span></div>
+          <a
+            href="mailto:ventas.sigilo@gmail.com?subject=Pedido Drip Bags"
+            class="btn-comprar"
+            >Pedir ahora →</a
+          >
+        </div>
+        <!-- Cáscara -->
+        <div class="producto-card reveal">
+          <div class="producto-bg-num">04</div>
+          <div class="producto-badge">Innovación</div>
+          <div class="producto-name">INFUSIÓN<br />CÁSCARA</div>
+          <div class="producto-sub">Cascara de café · 125gr</div>
+          <div class="producto-desc">
+            Una propuesta innovadora. Usando la cereza del café desarrollamos
+            una mezcla ácida, frutal, dulce y aromática. Siempre es buen
+            momento.
+          </div>
+          <div class="notas-sabor">
+            <span class="nota">Frutal</span>
+            <span class="nota">Dulce</span>
+            <span class="nota">Aromático</span>
+          </div>
+          <div class="producto-precio">$4.500 <span>COP · 125gr</span></div>
+          <a
+            href="mailto:ventas.sigilo@gmail.com?subject=Pedido Infusión Cáscara"
+            class="btn-comprar"
+            >Pedir ahora →</a
+          >
+        </div>
+        <!-- Institucional -->
+        <div class="producto-card reveal reveal-delay-1">
+          <div class="producto-bg-num">05</div>
+          <div class="producto-badge">Empresas</div>
+          <div class="producto-name">INSTITU-<br />CIONAL</div>
+          <div class="producto-sub">Para empresas · 2.5kg</div>
+          <div class="producto-desc">
+            Desarrollamos el perfil ideal para tu empresa. Ya molido y listo
+            para greca, cafetera o tradicional. Incluye receta. Ofrecemos
+            cafeteras de goteo.
+          </div>
+          <div class="notas-sabor">
+            <span class="nota">2.5kg</span>
+            <span class="nota">Molido</span>
+            <span class="nota">Personalizado</span>
+          </div>
+          <div class="producto-precio">$50.000 <span>COP · 2.5kg</span></div>
+          <a
+            href="mailto:ventas.sigilo@gmail.com?subject=Pedido Línea Institucional"
+            class="btn-comprar"
+            >Contactar →</a
+          >
+        </div>
+        <!-- Honey -->
+        <div class="producto-card reveal reveal-delay-2">
+          <div class="producto-bg-num">06</div>
+          <div class="producto-badge">Proceso especial</div>
+          <div class="producto-name">HONEY<br />PROCESS</div>
+          <div class="producto-sub">Post-cosecha · 340gr</div>
+          <div class="producto-desc">
+            Tazas muy dulces, cuerpo cremoso como yogurt y acidez balanceada.
+            Disponible en Yellow, Red y Black honey.
+          </div>
+          <div class="notas-sabor">
+            <span class="nota">Dulce</span>
+            <span class="nota">Cremoso</span>
+            <span class="nota">Balanceado</span>
+          </div>
+          <div class="producto-precio">$25.000 <span>COP · 340gr</span></div>
+          <a
+            href="mailto:ventas.sigilo@gmail.com?subject=Pedido Honey Process"
+            class="btn-comprar"
+            >Pedir ahora →</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- TIENDA HERO -->
+    <section class="tienda-hero" id="tienda">
+      <div class="tienda-left">
+        <div class="section-label reveal">Pago seguro</div>
+        <h2 class="reveal reveal-delay-1">COMPRA<br />FÁCIL<br />Y RÁPIDO</h2>
+        <p class="tagline reveal reveal-delay-2">
+          Aceptamos pagos con Wompi — la plataforma de pagos más segura de
+          Colombia. Tarjetas, PSE, Nequi y más.
+        </p>
+        <div
+          style="display: flex; gap: 12px; flex-wrap: wrap; position: relative"
+        >
+          <div class="wompi-badge reveal reveal-delay-3">
+            <div class="wompi-dot"></div>
+            Wompi Pagos Seguros
+          </div>
+          <div class="wompi-badge reveal reveal-delay-4">
+            <div class="wompi-dot"></div>
+            Siigo Facturación
+          </div>
+        </div>
+      </div>
+      <div class="tienda-right">
+        <div class="tienda-item reveal">
+          <div class="ti-icon j">☕</div>
+          <div class="ti-info">
+            <div class="ti-name">Café Especial 340gr</div>
+            <div class="ti-desc">Lavado tradicional colombiano</div>
+          </div>
+          <div class="ti-price">$20k</div>
+        </div>
+        <div class="tienda-item reveal reveal-delay-1">
+          <div class="ti-icon o">🌿</div>
+          <div class="ti-info">
+            <div class="ti-name">Honey + Natural 340gr</div>
+            <div class="ti-desc">Procesos diferenciados premium</div>
+          </div>
+          <div class="ti-price">$25k</div>
+        </div>
+        <div class="tienda-item reveal reveal-delay-2">
+          <div class="ti-icon d">📦</div>
+          <div class="ti-info">
+            <div class="ti-name">Pack Institucional 2.5kg</div>
+            <div class="ti-desc">Para tu empresa o negocio</div>
+          </div>
+          <div class="ti-price">$50k</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESO -->
+    <section class="proceso" id="proceso">
+      <div class="section-label reveal">De la tierra a tu taza</div>
+      <h2 class="section-title reveal reveal-delay-1">CÓMO<br />TRABAJAMOS</h2>
+      <div class="proceso-steps">
+        <div class="step reveal">
+          <div class="step-num">01</div>
+          <div class="step-icon">🌱</div>
+          <div class="step-title">PRODUCCIÓN</div>
+          <div class="step-desc">
+            Trabajamos directamente con productores, asesorando los cultivos
+            desde la semilla para garantizar los mejores granos.
+          </div>
+          <div class="step-bar"></div>
+        </div>
+        <div class="step reveal reveal-delay-1">
+          <div class="step-num">02</div>
+          <div class="step-icon">🍒</div>
+          <div class="step-title">COSECHA</div>
+          <div class="step-desc">
+            Selección manual de cerezas en su punto exacto de madurez. Solo los
+            mejores frutos pasan a la siguiente etapa.
+          </div>
+          <div class="step-bar"></div>
+        </div>
+        <div class="step reveal reveal-delay-2">
+          <div class="step-num">03</div>
+          <div class="step-icon">🔥</div>
+          <div class="step-title">TUESTE</div>
+          <div class="step-desc">
+            Cada lote se tuesta cuidadosamente para resaltar el perfil de sabor
+            único de cada origen y proceso.
+          </div>
+          <div class="step-bar"></div>
+        </div>
+        <div class="step reveal reveal-delay-3">
+          <div class="step-num">04</div>
+          <div class="step-icon">☕</div>
+          <div class="step-title">TU TAZA</div>
+          <div class="step-desc">
+            El resultado final: una taza extraordinaria que captura la esencia
+            de Colombia en cada sorbo que das.
+          </div>
+          <div class="step-bar"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INSTAGRAM -->
+    <section class="instagram">
+      <div class="section-label">Síguenos</div>
+      <h2 class="section-title reveal">SIGILO EN<br />INSTAGRAM</h2>
+      <div class="instagram-handle reveal reveal-delay-1">@sigilo.col</div>
+      <div class="ig-grid reveal reveal-delay-2">
+        <div class="ig-item"><div class="ig-inner">SIGILO</div></div>
+        <div class="ig-item"><div class="ig-inner">CAFÉ</div></div>
+        <div class="ig-item"><div class="ig-inner">COL</div></div>
+        <div class="ig-item"><div class="ig-inner">FELINO</div></div>
+        <div class="ig-item"><div class="ig-inner">SIGILO</div></div>
+        <div class="ig-item"><div class="ig-inner">CACAO</div></div>
+      </div>
+      <a
+        href="https://www.instagram.com/sigilo.col/"
+        target="_blank"
+        class="btn-primary reveal reveal-delay-3"
+        style="display: inline-flex; text-decoration: none"
+      >
+        <span>Ver Instagram →</span>
+      </a>
+    </section>
+
+    <!-- NOSOTROS -->
+    <section class="nosotros" id="nosotros">
+      <div class="nosotros-text">
+        <div class="section-label reveal">Nuestra Historia</div>
+        <h2 class="section-title reveal reveal-delay-1">
+          EL<br />SIGILO<br />DE LO<br />MEJOR
+        </h2>
+        <div class="nosotros-highlight reveal reveal-delay-2">
+          "¿Qué se esconde detrás de un producto de café o chocolate? Un sabor y
+          una serie de valores intangibles que buscan saltar a tu boca."
+        </div>
+        <p class="nosotros-body reveal reveal-delay-3">
+          Trabajar directamente con el productor nos da una visión clara de su
+          realidad. Asesorando los cultivos y procesos, garantizamos una mejor
+          calidad del producto, mejorando el precio de venta y la calidad de
+          vida del productor y su familia.
+        </p>
+        <a
+          href="mailto:ventas.sigilo@gmail.com"
+          class="btn-primary reveal reveal-delay-4"
+          style="display: inline-flex; text-decoration: none; margin-top: 8px"
+          ><span>Escríbenos</span></a
+        >
+      </div>
+      <div class="nosotros-visual reveal reveal-delay-2">
+        <div class="nosotros-img-container">
+          <div class="nosotros-img-placeholder">SIGILO · CAMPO</div>
+          <div class="nosotros-badge">
+            <div class="badge-num">100</div>
+            <div class="badge-text">%<br />COLOMBIA</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section class="contacto" id="contacto">
+      <h2 class="reveal">HABLEMOS<br />DE CAFÉ</h2>
+      <p class="contacto-sub reveal reveal-delay-1">
+        ¿Listo para descubrir el sabor que se esconde?
+      </p>
+      <div class="contacto-items">
+        <a
+          href="https://wa.me/573015109186"
+          target="_blank"
+          class="contacto-item reveal"
+        >
+          <div class="contacto-icon">📱</div>
+          <div class="contacto-label">WhatsApp</div>
+          <div class="contacto-val">+57 301 510 9186</div>
         </a>
-    </div>
-    <div class="tienda">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-        <a href="carrito.html" class="shop" target="_blank">
-            <i class="fa fa-shopping-cart"></i>
+        <a
+          href="mailto:ventas.sigilo@gmail.com"
+          class="contacto-item reveal reveal-delay-1"
+        >
+          <div class="contacto-icon">✉️</div>
+          <div class="contacto-label">Email</div>
+          <div class="contacto-val">ventas.sigilo@gmail.com</div>
         </a>
-    </div>
-    <div class="banner">
-        <img src="/img/B1 - copia.jpg" alt="">
-    </div>
+        <a
+          href="https://www.instagram.com/sigilo.col/"
+          target="_blank"
+          class="contacto-item reveal reveal-delay-2"
+        >
+          <div class="contacto-icon">📷</div>
+          <div class="contacto-label">Instagram</div>
+          <div class="contacto-val">@sigilo.col</div>
+        </a>
+      </div>
+    </section>
 
-    <div class="historia" id="historia">
-        <h1>SOBRE NOSOTROS</h1>
-        <div class="movil">
-            Somos el reflejo de las historias y lugares detrás de cada taza de café. Iniciamos en
-            los cultivos con un constante acompañamiento a nuestros caficultores en cada uno
-            de los procesos que desarrollan, de esta forma, cuidamos cada detalle de manera
-            sigilosa, aprendiendo juntos y obteniendo el equilibrio deseado entre precio justo y
-            calidad para clientes y productores.
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>SIGILO.CO</h3>
+          <p>
+            Specialty Coffee & Cacao colombiano. Trabajamos directamente con
+            productores para llevar lo mejor del campo colombiano a tu taza.
+          </p>
         </div>
-        <div class="pc">
-            Somos el reflejo de las historias y lugares detrás de cada taza de café. Iniciamos en
-            los cultivos con un constante acompañamiento a nuestros caficultores en cada uno
-            de los procesos que desarrollan, de esta forma, cuidamos cada detalle de manera
-            sigilosa, aprendiendo juntos y obteniendo el equilibrio deseado entre precio justo y
-            calidad para clientes y productores.
+        <div class="footer-col">
+          <h4>Productos</h4>
+          <ul>
+            <li><a href="#">Café Especial</a></li>
+            <li><a href="#">Diferenciado</a></li>
+            <li><a href="#">Honey Process</a></li>
+            <li><a href="#">Drip Bags</a></li>
+            <li><a href="#">Infusión Cáscara</a></li>
+            <li><a href="#">Institucional</a></li>
+          </ul>
         </div>
-        <div class="slider-container">
-            <div class="slider position"></div>
+        <div class="footer-col">
+          <h4>Contacto</h4>
+          <ul>
+            <li>
+              <a href="mailto:ventas.sigilo@gmail.com"
+                >ventas.sigilo@gmail.com</a
+              >
+            </li>
+            <li><a href="https://wa.me/573015109186">+57 301 510 9186</a></li>
+            <li><a href="https://instagram.com/sigilo.col">@sigilo.col</a></li>
+            <li><a href="#">Colombia</a></li>
+          </ul>
         </div>
-    </div>
-
-    <div class="productosh" id="productosh">
-        <h1>PRODUCTOS</h1>
-    </div>
-
-    <div class="productos" id="productos">
-
-        <div class="card2" id="card2">
-
-            <div class="face front" id="face-front-oncilla">
-                <img src="/img/Productos/Oncilla Logo.PNG"></img>
-            </div>
-
-            <div class="face back" id="face-back-oncilla">
-                <br>
-                <img src="/img/Productos/Oncilla.png" alt="">
-                <div class="link" id="link-oncilla">
-                    <br><br><br><br><br><br>
-                    <a href="#oncillla" onclick="mostrarPopup()">SABER MÁS</a>
-                </div>
-            </div>
-
-            <div id="miPopup" style="display: none;">
-                <h1 style="text-align: center; justify-content: center">ONCILLA</h1><br>
-                Contenido sobre oncilla<br>
-                Contenido sobre oncilla<br>
-                Contenido sobre oncilla<br><br>
-                <button onclick="cerrarPopup()" style="margin-left: 80px;">X</button>
-            </div>
-
-        </div>
-
-        <div class="card4" id="card4">
-
-            <div class="face front" id="face-front-tigrillo">
-                <img src="/img/Productos/Tigrillo Logo.PNG"></img>
-            </div>
-
-            <div class="face back" id="face-back-tigrillo">
-                <br>
-                <img src="/img/Productos/Tigrillo.png" alt="">
-                <div class="link" id="link-tigrillo">
-                    <br><br><br><br><br><br><br>
-                    <a href="#tigrillo" onclick="mostrarPopup2()">SABER MÁS</a>
-                </div>
-            </div>
-
-            <div id="miPopup2" style="display: none;">
-                <h1 style="text-align: center; justify-content: center">TIGRILLO</h1><br>
-                Contenido sobre tigrillo<br>
-                Contenido sobre tigrillo<br>
-                Contenido sobre tigrillo<br><br>
-                <button onclick="cerrarPopup2()" style="margin-left: 75px;">X</button>
-            </div>
-
-        </div>
-
-        <div class="card" id="card">
-
-            <div class="face front" id="face front">
-                <img src="/img/Productos/Ocelote Logo.PNG"></img>
-            </div>
-
-            <div class="face back" id="face-back-ocelote">
-                <br>
-                <img src="/img/Productos/Ocelote.png" alt="">
-                <div class="link" id="link-ocelote">
-                    <br><br><br><br><br><br>
-                    <a href="#ocelote" onclick="mostrarPopup3()">SABER MÁS</a>
-                </div>
-            </div>
-
-            <div id="miPopup3" style="display: none;">
-                <h1 style="text-align: center; justify-content: center">OCELOTE</h1><br>
-                Contenido sobre ocelote<br>
-                Contenido sobre ocelote<br>
-                Contenido sobre ocelote<br><br>
-                <button onclick="cerrarPopup3()" style="margin-left: 80px;">X</button>
-            </div>
-
-        </div>
-
-        <div class="card3" id="card3">
-
-            <div class="face front" id="face front">
-                <img src="/img/Productos/Jaguar Logo.PNG"></img>
-            </div>
-
-            <div class="face back" id="face-back-jaguar">
-                <br>
-                <img src="/img/Productos/Jaguar.png" alt="">
-                <div class="link" id="link-jaguar">
-                    <br><br><br><br><br><br><br>
-                    <a href="#jaguar" onclick="mostrarPopup4()">SABER MÁS</a>
-                </div>
-            </div>
-
-            <div id="miPopup4" style="display: none;">
-                <h1 style="text-align: center; justify-content: center">JAGUAR</h1><br>
-                Contenido sobre jaguar<br>
-                Contenido sobre jaguar<br>
-                Contenido sobre jaguar<br><br>
-                <button onclick="cerrarPopup4()" style="margin-left: 75px;">X</button>
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="verdeh" id="verdeh">
-        <h1>CAFÉ VERDE</h1>
-    </div>
-    <div class="verde" id="verde">
-        <section class="contact">
-            <div class="contact__image-wrapper">
-                <img src="/img/V1.jpg" alt="" class="contact__image" style="width: 650px; height: 350px;">
-            </div>
-            <div class="contact__right-side">
-                <p>Vive momentos únicos con nuestro café verde.</p>
-            </div>
-        </section>
-        <br><br>
-        <section class="contact">
-            <div class="contact__left-side">
-                <p style="font-size: 30px;">Vive momentos únicos con nuestro café verde.</p>
-            </div>
-            <div class="contact__image-wrapper">
-                <img src=" /img/V2.jpg" alt="" class="contact__image" style="width: 650px; height: 350px;">
-            </div>
-        </section>
-
-    </div>
-
-    <div class="contactoh" id="contactoh">
-        <h1>CONTÁCTANOS</h1>
-    </div>
-    <div class="contacto" id="contacto">
-        Si tienes alguna duda o inquietud, no dudes en comunicarte con nosotros. Somos SIGILO, somos familia.
-        <br><br>
-        <section class="contact">
-            <div class="contact__image-wrapper">
-                <img src="/img/Contacto.jpg" alt="" class="contact__image">
-            </div>
-            <div class="contact__right-side">
-                <form action="enviar.php" method="post" class="contact__form-wrapper">
-                    <div class="contact__input-line">
-                        <label for="name" class="contact__label">Nombre</label>
-                        <input type="text" name="name" id="name" class="contact__input" required>
-                    </div>
-                    <div class="contact__input-line">
-                        <label for="email" class="contact__label">Correo</label>
-                        <input type="email" name="email" id="email" class="contact__input" required>
-                    </div>
-                    <div class="contact__input-line">
-                        <label for="subject" class="contact__label">Asunto</label>
-                        <input type="text" name="subject" id="subject" class="contact__input" required>
-                    </div>
-                    <div class="contact__input-line">
-                        <label for="message" class="contact__label">Mensaje</label>
-                        <textarea type="text" name="message" id="message" class="contact__input--textarea"
-                            required></textarea>
-                    </div>
-                    <input type="submit" value="ENVIAR" class="contact__submit-button">
-                </form>
-            </div>
-        </section>
-    </div>
-    <footer class="pie-pagina">
-        <div class="pc-f">
-            <div class="grupo-1">
-                <div class="box">
-                    <h2>SECCIONES</h2>
-                    <a href="#historia" style="color: #0f0f0f;">Nuestra Historia</a><br><br>
-                    <a href="#productosh" style="color: #0f0f0f;">Productos</a><br><br>
-                    <a href="carrito.html" style="color: #0f0f0f;">Tienda</a><br><br>
-                    <a href="#verdeh" style="color: #0f0f0f;">Café Verde</a><br><br>
-                    <a href="#contactoh" style="color: #0f0f0f;">Contáctanos</a><br><br>
-                </div>
-                <div class="boxes">
-                    <a href="#inicio">
-                        <img src="/img/Logo.png" alt="Logo Sigilo">
-                    </a>
-                </div>
-
-                <div class="box">
-                    <h2>CONTACTO</h2>
-                    <div class="red-social">
-                        <a href="mailto:info@sigilocol.com">
-                            <p>info@sigilocol.com</p>
-                        </a>
-                        <p>+57 320 496 3699</p>
-                        <p>Armenia - Colombia</p>
-                        <a href="https://www.instagram.com/sigilo.col" class="fa fa-instagram"></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="movil-f">
-            <div class="grupo-1">
-                <div class="box">
-                    <h2>SECCIONES</h2>
-                    <a href="#historia" style="color: #0f0f0f;">Nuestra Historia</a><br><br>
-                    <a href="#productosh" style="color: #0f0f0f;">Productos</a><br><br>
-                    <a href="carrito.html" style="color: #0f0f0f;">Tienda</a><br><br>
-                    <a href="#verdeh" style="color: #0f0f0f;">Café Verde</a><br><br>
-                    <a href="#contactoh" style="color: #0f0f0f;">Contáctanos</a><br><br>
-                </div>
-
-                <div class="box">
-                    <h2>CONTACTO</h2>
-                    <div class="red-social">
-                        <a href="mailto:info@sigilocol.com">
-                            <p style="font-size: 15px;">info@sigilocol.com</p>
-                        </a>
-                        <p style="white-space: nowrap; font-size: 14px;">Armenia - Colombia</p>
-                        <a href="https://www.instagram.com/sigilo.col" class="fa fa-instagram"></a>
-                        <a href="https://api.whatsapp.com/send?phone=573204963699&text=Hola%2C%20quiero%20atenci%C3%B3n%20personalizada.%20%E2%98%95"
-                            class="fa fa-whatsapp"></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="grupo-2">
-            <small>&copy; 2023 <b>SIGILO</b>. Todos los Derechos Reservados.</small>
-        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 Sigilo.co · Specialty Coffee & Cacao Colombia</span>
+        <span
+          >Pagos seguros con <a href="#">Wompi</a> · Facturación con
+          <a href="#">Siigo</a></span
+        >
+      </div>
     </footer>
-</body>
 
+    <script>
+      // CURSOR
+      const cursor = document.getElementById("cursor");
+      const ring = document.getElementById("cursorRing");
+      let mx = 0,
+        my = 0,
+        rx = 0,
+        ry = 0;
+      document.addEventListener("mousemove", (e) => {
+        mx = e.clientX;
+        my = e.clientY;
+      });
+      function animCursor() {
+        cursor.style.left = mx + "px";
+        cursor.style.top = my + "px";
+        rx += (mx - rx) * 0.12;
+        ry += (my - ry) * 0.12;
+        ring.style.left = rx + "px";
+        ring.style.top = ry + "px";
+        requestAnimationFrame(animCursor);
+      }
+      animCursor();
+      document
+        .querySelectorAll(
+          "a, button, .linea-card, .producto-card, .tienda-item, .step",
+        )
+        .forEach((el) => {
+          el.addEventListener("mouseenter", () => {
+            cursor.style.width = "20px";
+            cursor.style.height = "20px";
+            ring.style.width = "56px";
+            ring.style.height = "56px";
+          });
+          el.addEventListener("mouseleave", () => {
+            cursor.style.width = "12px";
+            cursor.style.height = "12px";
+            ring.style.width = "36px";
+            ring.style.height = "36px";
+          });
+        });
+
+      // NAV SCROLL
+      const navbar = document.getElementById("navbar");
+      window.addEventListener("scroll", () => {
+        navbar.classList.toggle("scrolled", window.scrollY > 60);
+      });
+
+      // REVEAL ON SCROLL
+      const reveals = document.querySelectorAll(".reveal");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) e.target.classList.add("visible");
+          });
+        },
+        { threshold: 0.12 },
+      );
+      reveals.forEach((el) => observer.observe(el));
+    </script>
+  </body>
 </html>
